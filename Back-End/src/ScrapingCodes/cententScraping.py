@@ -1,264 +1,303 @@
-import os
-import requests
 import json
-import hashlib
+import requests
+import time
+import random
+from pathlib import Path
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin, urlparse
+import fitz  # PyMuPDF
+import sys
 import re
-from urllib.parse import urljoin
-from bs4 import BeautifulSoup, Tag
-import trafilatura
-import logging
-from io import BytesIO
-import pdfplumber
-import PyPDF2
-import concurrent.futures
 
 # Configuration
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-INPUT_FILE = os.path.normpath(os.path.join(SCRIPT_DIR, "..", "Data", "Part1_islam", 
-                    "إعادة الفتح البيزنطي (533-550 م)", "Byzantine reconquest (533–550 CE).json"))
-OUTPUT_FILE = os.path.normpath(os.path.join(SCRIPT_DIR, "..", "Data", "Part1_islam", 
-                     "إعادة الفتح البيزنطي (533-550 م)2", "Byzantine reconquest (533–550 CE).json"))
-MAX_WORKERS = 3
+REQUEST_TIMEOUT = 40
+RATE_LIMIT_DELAY = (5, 15)  # Random delay between requests in seconds
+PDF_LINK_KEYWORDS = {
+    # English
+    'pdf', 'download', 'document', 'paper', 'article', 'full text', 'report',
+    # French
+    'télécharger', 'document', 'fichier', 'article', 'texte intégral', 'rapport',
+    # Spanish
+    'descargar', 'documento', 'artículo', 'texto completo', 'informe',
+    # Arabic (transliterated and actual Arabic)
+    'تحميل', 'وثيقة', 'ملف', 'مقال', 'نص كامل', 'تقرير',
+    'pdf', 'download', 'tasjil', 'malaf'
+}
 
-logging.basicConfig(
-    filename='scraper.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
-def generate_id(title, url):
-    """Create unique ID from title and URL"""
-    base_str = f"{title[:50]}{url}".encode('utf-8')
-    return hashlib.md5(base_str).hexdigest()[:12]
-
-def clean_text(text):
-    """Basic text cleaner preserving multilingual content"""
-    if not text:
-        return ''
-    text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
-    return text.strip()
-
-def extract_structured_content(html):
-    """Extract content with hierarchical headings"""
-    soup = BeautifulSoup(html, 'html.parser')
-    structure = {
-        'title': '',
-        'sections': []
-    }
-
-    # Find main title
-    for level in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
-        title_tag = soup.find(level)
-        if title_tag:
-            structure['title'] = clean_text(title_tag.get_text())
-            break
-    else:
-        title_tag = soup.find('title')
-        if title_tag:
-            structure['title'] = clean_text(title_tag.get_text())
-
-    # Extract sections
-    current_section = {'subtitle': '', 'paragraphs': []}
-    for element in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p']):
-        if element.name.startswith('h'):
-            if current_section['subtitle'] or current_section['paragraphs']:
-                structure['sections'].append(current_section)
-                current_section = {'subtitle': '', 'paragraphs': []}
-            current_section['subtitle'] = clean_text(element.get_text())
-        else:
-            paragraph = clean_text(element.get_text())
-            if paragraph:
-                current_section['paragraphs'].append(paragraph)
-
-    if current_section['subtitle'] or current_section['paragraphs']:
-        structure['sections'].append(current_section)
-
-    return structure
-
-def validate_pdf_url(url):
-    """Verify if URL points to a PDF using HEAD request"""
+def extract_text_from_pdf(pdf_content):
+    """Extract text from PDF content using PyMuPDF with enhanced error handling"""
     try:
-        response = requests.head(url, timeout=10, allow_redirects=True)
-        if 'application/pdf' in response.headers.get('Content-Type', '').lower():
-            return True
-        if response.status_code != 200:
-            logging.warning(f"Non-200 status code for PDF URL: {url}")
-        return False
-    except Exception as e:
-        logging.error(f"HEAD request failed for {url}: {str(e)}")
-        return False
-
-def extract_pdf_content(url):
-    """Extract structured content from PDFs with validation"""
-    if not validate_pdf_url(url):
-        return None
-
-    try:
-        response = requests.get(url, timeout=30)
-        response.raise_for_status()
-        content = BytesIO(response.content)
+        doc = fitz.open(stream=pdf_content, filetype="pdf")
+        text = []
+        for page in doc:
+            text.append(page.get_text())
+        full_text = "\n".join(text).strip()
         
-        pdf_data = {'full_text': '', 'sections': []}
+        # Check if text extraction was successful
+        if not full_text:
+            return "", "PDF appears to be image-based or empty"
+            
+        return full_text, None
+    except Exception as e:
+        return "", f"PDF extraction error: {str(e)}"
 
-        # Try both PDF libraries
-        for lib in [pdfplumber, PyPDF2]:
+def is_pdf_link(url, link_text=None):
+    """Enhanced PDF link detection with multilingual support"""
+    url_lower = url.lower()
+    
+    # Check URL pattern
+    if url_lower.endswith('.pdf'):
+        return True
+        
+    # Check link text for keywords in any language
+    if link_text:
+        text_lower = link_text.lower()
+        for keyword in PDF_LINK_KEYWORDS:
+            if keyword in text_lower:
+                return True
+                
+    # Additional check for Arabic PDF indicators
+    arabic_pdf_patterns = re.compile(r'\.pdf$|ملف|وثيقة|تحميل', re.IGNORECASE)
+    if re.search(arabic_pdf_patterns, url):
+        return True
+        
+    return False
+
+def fetch_url(url):
+    """Fetch URL with enhanced error handling and language support"""
+    time.sleep(random.uniform(*RATE_LIMIT_DELAY))
+    
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+        'Accept-Language': 'en-US,en;q=0.9,ar;q=0.8,fr;q=0.7,es;q=0.6'
+    }
+    
+    try:
+        response = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
+        response.raise_for_status()
+        
+        # Handle content encoding
+        if response.encoding is None:
+            response.encoding = 'utf-8'
+            
+        return {
+            'content': response.content,
+            'content_type': response.headers.get('Content-Type', ''),
+            'status': 'success',
+            'encoding': response.encoding
+        }
+    except requests.exceptions.RequestException as e:
+        return {
+            'content': None,
+            'content_type': '',
+            'status': 'fetch_error',
+            'error': str(e)
+        }
+
+def scrape_html_content(html_content, base_url, encoding='utf-8'):
+    """Extract text and find PDF links from HTML with multilingual support"""
+    try:
+        # Handle different encodings
+        soup = BeautifulSoup(html_content.decode(encoding, errors='replace'), 'html.parser')
+        
+        # Extract main text content (supporting RTL languages)
+        text_parts = []
+        for element in soup.find_all(re.compile(r'^h[1-6]$|^p$|^div$|^article$|^section$')):
+            if element.name in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+                text_parts.append('\n' + element.get_text(strip=True) + '\n')
+            else:
+                text_parts.append(element.get_text(strip=True) + '\n')
+        
+        text_content = '\n'.join(t.strip() for t in text_parts if t.strip())
+        
+        # Find PDF links with multilingual support
+        pdf_links = set()
+        for link in soup.find_all('a', href=True):
+            href = link['href'].strip()
+            link_text = link.get_text(strip=True) or link.get('title', '')
+            
             try:
-                content.seek(0)  # Reset buffer for each attempt
-                if lib == pdfplumber:
-                    with pdfplumber.open(content) as pdf:
-                        pdf_data['full_text'] = '\n\n'.join(
-                            [clean_text(page.extract_text()) for page in pdf.pages]
-                        )
-                else:
-                    reader = lib.PdfReader(content)
-                    pdf_data['full_text'] = '\n\n'.join(
-                        [clean_text(page.extract_text()) for page in reader.pages]
-                    )
-                break
-            except Exception as e:
-                logging.debug(f"{lib.__name__} failed: {str(e)}")
+                absolute_url = urljoin(base_url, href)
+            except ValueError:
                 continue
-
-        if not pdf_data['full_text']:
-            return None
-
-        # Extract structure
-        current_section = {'subtitle': 'Document', 'paragraphs': []}
-        for line in pdf_data['full_text'].split('\n'):
-            line = clean_text(line)
-            if line:
-                if line.isupper() and len(line) < 100:
-                    if current_section['paragraphs']:
-                        pdf_data['sections'].append(current_section)
-                    current_section = {'subtitle': line, 'paragraphs': [line]}
-                else:
-                    current_section['paragraphs'].append(line)
-        if current_section['paragraphs']:
-            pdf_data['sections'].append(current_section)
-
-        return pdf_data
-
-    except Exception as e:
-        logging.error(f"PDF processing failed for {url}: {str(e)}")
-        return None
-
-def find_pdf_links(html, base_url):
-    """Find and validate PDF links in HTML content"""
-    soup = BeautifulSoup(html, 'html.parser')
-    pdf_links = set()
-
-    for a_tag in soup.find_all('a', href=True):
-        href = a_tag['href']
-        absolute_url = urljoin(base_url, href)
+                
+            # Skip non-HTTP links and anchors
+            if absolute_url.startswith(('mailto:', 'tel:', 'javascript:')):
+                continue
+                
+            if is_pdf_link(absolute_url, link_text):
+                pdf_links.add((absolute_url, link_text))
         
-        # Check URL patterns
-        if re.search(r'\.pdf($|\?|/)', absolute_url, re.I) or '/pdf' in absolute_url.lower():
-            pdf_links.add(absolute_url)
-
-    return list(pdf_links)
-
-def process_entry(entry):
-    """Process each entry with enhanced PDF detection"""
-    result = {
-        "id": generate_id(entry.get('title', ''), entry.get('url', '')),
-        "title": clean_text(entry.get('title', '')),
-        "summary": clean_text(entry.get('abstract', '')),
-        "sources": [{
-            "authors": clean_text(entry.get('authors', '')),
-            "journal": clean_text(entry.get('journal', '')),
-            "year": entry.get('year'),
-            "url": entry.get('url')
-        }],
-        "sections": [],
-        "pdf": None,
-        "linked_pdfs": []
-    }
-
-    try:
-        # Direct PDF processing
-        if entry['url'].lower().endswith('.pdf'):
-            pdf_content = extract_pdf_content(entry['url'])
-            if pdf_content:
-                result["pdf"] = {
-                    "full_text": pdf_content['full_text'][:10000],
-                    "sections": pdf_content['sections']
-                }
-            return result
-
-        # HTML content processing
-        response = requests.get(entry['url'], timeout=30)
-        response.raise_for_status()
-
-        # Extract main content structure
-        content_structure = extract_structured_content(response.text)
-        if not result['title']:
-            result['title'] = content_structure['title']
-
-        # Format sections
-        for section in content_structure['sections']:
-            result["sections"].append({
-                "subtitle": section['subtitle'],
-                "paragraph": '\n\n'.join(section['paragraphs'][:3])
-            })
-
-        # Fallback content extraction
-        if not result["sections"]:
-            extracted = trafilatura.extract(response.text)
-            if extracted:
-                result["sections"].append({
-                    "subtitle": "Main Content",
-                    "paragraph": clean_text(extracted)[:2000]
-                })
-
-        # Generate summary
-        if not result["summary"] and result["sections"]:
-            result["summary"] = result["sections"][0]["paragraph"][:300]
-
-        # Find and process PDF links
-        pdf_urls = find_pdf_links(response.text, entry['url'])
-        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-            future_to_url = {
-                executor.submit(extract_pdf_content, url): url
-                for url in pdf_urls
-            }
-            for future in concurrent.futures.as_completed(future_to_url):
-                pdf_content = future.result()
-                if pdf_content:
-                    result["linked_pdfs"].append({
-                        "url": future_to_url[future],
-                        "full_text": pdf_content['full_text'][:10000],
-                        "sections": pdf_content['sections']
-                    })
-
+        return {
+            'text': text_content,
+            'pdf_links': [{'url': url, 'text': text} for url, text in pdf_links],
+            'error': None
+        }
     except Exception as e:
-        logging.error(f"Processing failed for {entry.get('url')}: {str(e)}")
-        result["error"] = str(e)
+        return {
+            'text': '',
+            'pdf_links': [],
+            'error': f"HTML processing error: {str(e)}"
+        }
 
+def process_result(original_result):
+    """Process a single result with enhanced language support"""
+    result = {
+        'original_result': original_result,
+        'main_url_scrape': {
+            'url': original_result['url'],
+            'content_type': 'other',
+            'scraped_text': '',
+            'status': 'pending',
+            'error_message': None,
+            'encoding': 'utf-8'
+        },
+        'linked_pdfs_found': []
+    }
+    
+    # Fetch main URL
+    main_url = original_result['url']
+    fetch_result = fetch_url(main_url)
+    
+    if fetch_result['status'] != 'success':
+        result['main_url_scrape'].update({
+            'status': fetch_result['status'],
+            'error_message': fetch_result.get('error'),
+            'content_type': 'other'
+        })
+        return result
+    
+    # Determine content type and encoding
+    content_type = fetch_result['content_type'].lower()
+    encoding = fetch_result.get('encoding', 'utf-8')
+    result['main_url_scrape']['encoding'] = encoding
+    
+    # Detect content type
+    if 'html' in content_type:
+        content_type = 'html'
+    elif 'pdf' in content_type or main_url.lower().endswith('.pdf'):
+        content_type = 'pdf'
+    else:
+        result['main_url_scrape'].update({
+            'status': 'unsupported_type',
+            'error_message': f"Unsupported content type: {content_type}"
+        })
+        return result
+    
+    result['main_url_scrape']['content_type'] = content_type
+    
+    try:
+        if content_type == 'pdf':
+            pdf_text, pdf_error = extract_text_from_pdf(fetch_result['content'])
+            result['main_url_scrape']['scraped_text'] = pdf_text
+            result['main_url_scrape']['status'] = 'success' if pdf_text else 'content_empty'
+            if pdf_error:
+                result['main_url_scrape']['error_message'] = pdf_error
+                
+        elif content_type == 'html':
+            html_processing = scrape_html_content(
+                fetch_result['content'],
+                main_url,
+                encoding=encoding
+            )
+            
+            result['main_url_scrape']['scraped_text'] = html_processing['text']
+            result['main_url_scrape']['status'] = 'success' if html_processing['text'] else 'content_empty'
+            
+            if html_processing['error']:
+                result['main_url_scrape']['error_message'] = html_processing['error']
+            
+            # Process linked PDFs if HTML processed
+            if result['main_url_scrape']['status'] in ['success', 'content_empty']:
+                for pdf_link in html_processing['pdf_links']:
+                    pdf_result = {
+                        'pdf_url': pdf_link['url'],
+                        'link_text': pdf_link['text'],
+                        'scraped_text': '',
+                        'status': 'pending',
+                        'error_message': None
+                    }
+                    
+                    pdf_fetch = fetch_url(pdf_link['url'])
+                    if pdf_fetch['status'] != 'success':
+                        pdf_result.update({
+                            'status': pdf_fetch['status'],
+                            'error_message': pdf_fetch.get('error')
+                        })
+                    else:
+                        pdf_text, pdf_error = extract_text_from_pdf(pdf_fetch['content'])
+                        pdf_result['scraped_text'] = pdf_text
+                        pdf_result['status'] = 'success' if pdf_text else 'content_empty'
+                        if pdf_error:
+                            pdf_result['error_message'] = pdf_error
+                    
+                    result['linked_pdfs_found'].append(pdf_result)
+                    
+    except Exception as e:
+        result['main_url_scrape']['status'] = 'scrape_error'
+        result['main_url_scrape']['error_message'] = str(e)
+    
     return result
 
-def process_all_entries():
-    """Main processing function with concurrency"""
+def process_json_file(input_path, output_dir):
+    """Process a JSON file with enhanced error handling"""
     try:
-        with open(INPUT_FILE, 'r', encoding='utf-8') as f:
-            entries = json.load(f)
-        
-        results = []
-        
-        with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-            futures = [executor.submit(process_entry, entry) for entry in entries]
-            
-            for future in concurrent.futures.as_completed(futures):
-                results.append(future.result())
-                print(f"Processed {len(results)}/{len(entries)} entries")
-
-        with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-            json.dump(results, f, ensure_ascii=False, indent=2)
-
-        print(f"Successfully processed {len(results)} entries")
-
+        with open(input_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
     except Exception as e:
-        logging.error(f"Critical error: {str(e)}")
-        raise
+        print(f"Error loading {input_path}: {str(e)}")
+        return None
+    
+    output = {
+        'event': data.get('event', 'Unknown Event'),
+        'scraped_results': {}
+    }
+    
+    for lang, results in data.get('results', {}).items():
+        output['scraped_results'][lang] = []
+        for idx, original_result in enumerate(results):
+            print(f"  Processing {lang} result {idx+1}/{len(results)}")
+            processed = process_result(original_result)
+            output['scraped_results'][lang].append(processed)
+    
+    # Create output path
+    output_path = output_dir / f"{input_path.stem}_scraped.json"
+    
+    try:
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(output, f, ensure_ascii=False, indent=2)
+        return output_path
+    except Exception as e:
+        print(f"Error saving {output_path}: {str(e)}")
+        return None
+
+def main():
+    """Main function with directory processing"""
+    input_dir = Path(input("Enter path to directory containing filtered JSON files: ").strip())
+    if not input_dir.exists():
+        print(f"Error: Directory {input_dir} does not exist")
+        sys.exit(1)
+        
+    output_dir = input_dir.parent / "scraped_results"
+    output_dir.mkdir(exist_ok=True)
+    
+    json_files = list(input_dir.rglob('*.json'))
+    if not json_files:
+        print("No JSON files found")
+        sys.exit(0)
+    
+    print(f"Found {len(json_files)} files to process")
+    
+    for idx, json_file in enumerate(json_files, 1):
+        print(f"\nProcessing file {idx}/{len(json_files)}: {json_file.name}")
+        start_time = time.time()
+        
+        result_path = process_json_file(json_file, output_dir)
+        
+        if result_path:
+            print(f"  Saved to {result_path} in {time.time()-start_time:.1f}s")
+    
+    print("\nScraping process completed")
 
 if __name__ == "__main__":
-    process_all_entries()
+    main()
