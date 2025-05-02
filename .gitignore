@@ -172,3 +172,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+
+#folders
+Back-End/src/Data/data_raw_auto_retry_hierarchical/Back-End/src/Data
