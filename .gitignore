@@ -173,3 +173,6 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+./Back-End/src/Data
+./Back-End/venv
+./Back-End/src/IA_modele_treat/DATA_IA

@@ -1,0 +1,1422 @@
+{
+  "event": "صراعات الفاطميين والأمويين على المغرب",
+  "input_file_path": "صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json",
+  "stage1_processed_results": {
+    "en": [
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.degruyter.com/document/doi/10.1515/9781641893862-005/pdf?licenseType=restricted",
+        "original_source_metadata": {
+          "original_item_url": "https://www.degruyter.com/document/doi/10.1515/9781641893862-005/pdf?licenseType=restricted",
+          "source_type": "main_url",
+          "source_url": "https://www.degruyter.com/document/doi/10.1515/9781641893862-005/pdf?licenseType=restricted",
+          "link_text": null,
+          "original_language_section": "en"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 59232,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 14808,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 59232,
+          "truncated_length_chars": 59232
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a webpage from a publishing house (De Gruyter Brill) containing information about their services, authors, journals, and books.  It does not contain any information pertaining to the conflicts between the Fatimids and Umayyads in the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.taylorfrancis.com/chapters/edit/10.4324/9781315609010-9/mediterranean-encounter-fatimids-europe-tenth-twelfth-centuries-yaacov-lev",
+        "original_source_metadata": {
+          "original_item_url": "https://www.taylorfrancis.com/chapters/edit/10.4324/9781315609010-9/mediterranean-encounter-fatimids-europe-tenth-twelfth-centuries-yaacov-lev",
+          "source_type": "main_url",
+          "source_url": "https://www.taylorfrancis.com/chapters/edit/10.4324/9781315609010-9/mediterranean-encounter-fatimids-europe-tenth-twelfth-centuries-yaacov-lev",
+          "link_text": null,
+          "original_language_section": "en"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 19276,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 4819,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 19276,
+          "truncated_length_chars": 19276
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source discusses maritime trade and political conflicts in the Iberian Peninsula during the High Middle Ages.  It does not mention the Fatimids or the Umayyads, nor any conflict between them over the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.academia.edu/download/37892716/Lev__Mediterranean_Encounter.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://www.academia.edu/download/37892716/Lev__Mediterranean_Encounter.pdf",
+          "source_type": "main_url",
+          "source_url": "https://www.academia.edu/download/37892716/Lev__Mediterranean_Encounter.pdf",
+          "link_text": null,
+          "original_language_section": "en"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 3623,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 905,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 3623,
+          "truncated_length_chars": 3623
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a webpage interface for Academia.edu, not a historical source discussing the conflict between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/it/resources/an/5323520",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/it/resources/an/5323520",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/it/resources/an/5323520",
+          "link_text": null,
+          "original_language_section": "en"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 16941,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 4235,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 16941,
+          "truncated_length_chars": 16941
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a book description for \"Humanism Economics: A Brief History of Human Intelligence.\" It discusses economic theories and history, but does not contain any information about the conflicts between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://search.proquest.com/openview/f0348fddf62ab97bd42b68c706aef48b/1?pq-origsite=gscholar&cbl=18750&diss=y",
+        "original_source_metadata": {
+          "original_item_url": "https://search.proquest.com/openview/f0348fddf62ab97bd42b68c706aef48b/1?pq-origsite=gscholar&cbl=18750&diss=y",
+          "source_type": "main_url",
+          "source_url": "https://search.proquest.com/openview/f0348fddf62ab97bd42b68c706aef48b/1?pq-origsite=gscholar&cbl=18750&diss=y",
+          "link_text": null,
+          "original_language_section": "en"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 10618,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 2654,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 10618,
+          "truncated_length_chars": 10618
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a metadata record for a dissertation on art museums in the Arabian Peninsula, and has no content related to the historical conflict between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      }
+    ],
+    "ar": [
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://repository.uobabylon.edu.iq/papers/publication.aspx?Pubid=1655",
+        "original_source_metadata": {
+          "original_item_url": "https://repository.uobabylon.edu.iq/papers/publication.aspx?Pubid=1655",
+          "source_type": "main_url",
+          "source_url": "https://repository.uobabylon.edu.iq/papers/publication.aspx?Pubid=1655",
+          "link_text": null,
+          "original_language_section": "ar"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 53900,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 13475,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 53900,
+          "truncated_length_chars": 53900
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a list of research options, titles, and authors from the University of Babylon's repository. It does not contain any specific content directly related to the conflicts between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      }
+    ],
+    "fr": [
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://bmcm.flbenmsik.ma/wp-content/uploads/2020/09/1-136.pdf#page=122",
+        "original_source_metadata": {
+          "original_item_url": "https://bmcm.flbenmsik.ma/wp-content/uploads/2020/09/1-136.pdf#page=122",
+          "source_type": "main_url",
+          "source_url": "https://bmcm.flbenmsik.ma/wp-content/uploads/2020/09/1-136.pdf#page=122",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 334151,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 83537,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 334151,
+          "truncated_length_chars": 334151
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a collection of articles from a journal about Moroccan culture, multiculturalism, and identity. It does not discuss the conflicts between the Fatimids and Umayyads in Morocco."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/it/resources/an/5092625",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/it/resources/an/5092625",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/it/resources/an/5092625",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 16041,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 4010,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 16041,
+          "truncated_length_chars": 16041
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text discusses disputes and conflicts within Christianity during the Roman Empire and the Middle Ages.  It does not mention the Fatimids, Umayyads, or the Maghreb, making it irrelevant to the requested topic."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://hal.science/hal-02306895/",
+        "original_source_metadata": {
+          "original_item_url": "https://hal.science/hal-02306895/",
+          "source_type": "main_url",
+          "source_url": "https://hal.science/hal-02306895/",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 48659,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 12164,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 48659,
+          "truncated_length_chars": 48659
+        },
+        "llm_processed_output": {
+          "relevance_status": "relevant",
+          "source_summary": "This source, a 2019 book section by Aurélien Montel, focuses on the circulation of Sudanese gold in the 4th/10th century and its relationship with the political conflicts between the Umayyad Caliphate of Cordoba and the Fatimid Caliphate of Kairouan in the Maghreb.  The author argues that while the territorial disputes between the two caliphates are important, the gold trade from the Sudan to al-Andalus deserves more study.  The text highlights the understudied nature of this trade and the itineraries it took, contrasting with previous analyses that overly emphasized the geopolitical rivalry as the sole driver of conflict.  Montel emphasizes that examining the gold trade offers a new perspective on the 4th/10th century Maghreb before the rise of Berber dynasties.",
+          "extracted_key_facts": [
+            "The author examines the circulation of Sudanese gold in the 4th/10th century.",
+            "The study focuses on the period before the emergence of Berber dynasties in the Maghreb.",
+            "The Umayyads of Cordoba ruled from 138/756 to 422/1031.",
+            "The Fatimids of Kairouan ruled from 297/909 to 567/1171.",
+            "Previous analyses often prioritized the geopolitical rivalry between the Umayyads and Fatimids as the primary driver of conflict.",
+            "The author argues for a more comprehensive understanding that incorporates the gold trade's role.",
+            "The gold was extracted and refined in the Niger Bend, transported across the Sahara to the Maghreb, and then potentially to al-Andalus, the Latin West, or the Middle East."
+          ]
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://hal.science/hal-02306895v1/file/Texte%20publi%C3%A9.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://hal.science/hal-02306895/",
+          "source_type": "linked_pdf",
+          "source_url": "https://hal.science/hal-02306895v1/file/Texte%20publi%C3%A9.pdf",
+          "link_text": "Télécharger le fichier",
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 61371,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 15342,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 61371,
+          "truncated_length_chars": 61371
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source is a collection of academic papers on medieval metallurgy and the circulation of precious metals in the Mediterranean, focusing on mining, production, and trade in various regions, including al-Andalus, but does not directly discuss the conflicts between the Fatimids and Umayyads over the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/gs/resourceProxy?an=5289600&publisher=FZ1523",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/gs/resourceProxy?an=5289600&publisher=FZ1523",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/gs/resourceProxy?an=5289600&publisher=FZ1523",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 26820,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 6705,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 26820,
+          "truncated_length_chars": 26820
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a catalog entry for a book about the Strait of Gibraltar in antiquity and the Middle Ages.  While it mentions historical figures and periods, it does not focus on the specific conflict between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.persee.fr/doc/bcai_0259-7373_2008_num_24_1_1041_t3_0104_0000_1",
+        "original_source_metadata": {
+          "original_item_url": "https://www.persee.fr/doc/bcai_0259-7373_2008_num_24_1_1041_t3_0104_0000_1",
+          "source_type": "main_url",
+          "source_url": "https://www.persee.fr/doc/bcai_0259-7373_2008_num_24_1_1041_t3_0104_0000_1",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 99984,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 24996,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 99984,
+          "truncated_length_chars": 99984
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a book review about a study on the production, commercialization, and use of sugar in the medieval Mediterranean. It does not discuss the conflicts between the Fatimids and Umayyads in the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://amu.hal.science/hal-03165522/document",
+        "original_source_metadata": {
+          "original_item_url": "https://amu.hal.science/hal-03165522/document",
+          "source_type": "main_url",
+          "source_url": "https://amu.hal.science/hal-03165522/document",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 29654,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 7413,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 29654,
+          "truncated_length_chars": 29654
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text discusses the history, culture, and potential digital preservation strategies for the city of Tripoli, Lebanon.  It does not contain any information directly related to the conflicts between the Fatimid and Umayyad caliphates over North Africa (al-Maghrib)."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://journals.openedition.org/mcv/4139",
+        "original_source_metadata": {
+          "original_item_url": "https://journals.openedition.org/mcv/4139",
+          "source_type": "main_url",
+          "source_url": "https://journals.openedition.org/mcv/4139",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 80534,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 20133,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 80534,
+          "truncated_length_chars": 80534
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source is a review of a book about the Umayyad Caliphate in al-Andalus, focusing on Abd al-Rahman III.  It discusses his reign, conflicts within historiography, and relations with other caliphates (Abbasid and Fatimid). However, the primary focus is on the internal dynamics and historiography of al-Andalus, not on the specific conflicts between the Fatimids and Umayyads over the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/gs/resourceProxy?an=4863289&publisher=FZ2990",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/gs/resourceProxy?an=4863289&publisher=FZ2990",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/gs/resourceProxy?an=4863289&publisher=FZ2990",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 9800,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 2450,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 9800,
+          "truncated_length_chars": 9800
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a catalog entry for a book about Moroccan customs and traditions, from the origins to the present day.  It does not contain any information directly related to the conflicts between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/gs/resourceProxy?an=5093445&publisher=FZ2990#page=13",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/gs/resourceProxy?an=5093445&publisher=FZ2990#page=13",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/gs/resourceProxy?an=5093445&publisher=FZ2990#page=13",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 14899,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 3724,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 14899,
+          "truncated_length_chars": 14899
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a book description about the integration of former slaves into military forces across the Muslim and Christian worlds from the 13th to 21st centuries. It does not discuss the specific conflict between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|http://www.clio.fr/bibliotheque/pdf/pdf_les_invasions_hilaliennes_en_ifriqiya.pdf",
+        "original_source_metadata": {
+          "original_item_url": "http://www.clio.fr/bibliotheque/pdf/pdf_les_invasions_hilaliennes_en_ifriqiya.pdf",
+          "source_type": "main_url",
+          "source_url": "http://www.clio.fr/bibliotheque/pdf/pdf_les_invasions_hilaliennes_en_ifriqiya.pdf",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 21494,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 5373,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 21494,
+          "truncated_length_chars": 21494
+        },
+        "llm_processed_output": {
+          "relevance_status": "relevant",
+          "source_summary": "This source examines the arrival and impact of the Banu Hilal and Banu Sulaym Arab tribes in Ifriqiya (modern Tunisia and eastern Algeria) in the mid-11th century, often framed as an invasion. It provides a historical account of the Fatimid dynasty's rise to power in the region, their conflict with the Aghlabids, and subsequent interaction with the Hilalian tribes. The text details the Fatimids' religious ideology (Shia Islam), their attempts to expand their influence throughout North Africa and into Egypt, and the struggles they faced against Berber populations.  It explains how the Fatimids, initially supported by the Kutama Berbers, utilized the Hilal tribes as a military instrument against the Zirides, another Berber dynasty, which had previously been a Fatimid vassal. The source discusses the political and economic ramifications of the Hilalian migrations, including the decline of Kairouan and the fragmentation of power in Ifriqiya. It also examines the cultural and social consequences of the interaction between the nomadic Hilal tribes and the settled Berber population, highlighting both negative aspects (devastation, displacement) and positive aspects (cultural exchange and ultimately, a significant demographic shift). The text examines various interpretations of the Hilalian arrival and the political maneuvering among the different groups and dynasties, including the Zirides and Hammadides.  The author critiques overly simplistic narratives that portray the Hilalian migration solely as a destructive force, arguing that it was part of a complex interplay of political, social, and economic factors.  The summary also includes information about the Zirides and their struggles with the Hilal, and their efforts to develop a naval presence, and their final break with Fatimid authority.  It shows how the Hilal tribes, initially used by the Fatimids, eventually became a powerful force on their own.  In the end, the text details the consequences of the Hilalian migrations for Ifriqiya and the broader Maghreb.",
+          "extracted_key_facts": [
+            "The Banu Hilal and Banu Sulaym Arab tribes arrived in Ifriqiya in the mid-11th century.",
+            "Their arrival was often characterized as an invasion, with devastating consequences for the region.",
+            "Ibn Khaldun described the Hilal tribes as destructive nomads, contrasting their lifestyle with settled urban populations.",
+            "The Fatimids, a Shia Muslim dynasty, claimed descent from the Prophet Muhammad's daughter Fatima and sought to establish their rule in North Africa.",
+            "The Fatimids utilized the Kutama Berber tribe to assist in conquering the Aghlabids.",
+            "A Fatimid missionary, Abu Abdallah, played a key role in the Fatimid conquest of the Aghlabids.",
+            "The Fatimids established their capital in Mahdiya, between Sousse and Sfax.",
+            "The Fatimids eventually extended their control throughout North Africa, controlling trade routes and commerce with sub-Saharan regions.",
+            "The Fatimids launched expeditions against Egypt and Sicily to assert their claim to the Abbasid caliphate.",
+            "The Fatimids treated the Berbers with contempt, often referring to them as \"rabble\" or \"scum\".",
+            "After the reign of the Fatimid Mahdi (909-934), other Fatimid rulers succeeded him, facing resistance from the Kharijites and other groups.",
+            "Al-Mu'izz, the last Fatimid ruler to spend significant time in Ifriqiya, transferred governance to the Zirid dynasty.",
+            "The arrival of the Hilalian tribes was a response, according to tradition, to the Zirid dynasty's break from Fatimid rule in 1048.",
+            "The Hilal tribes, estimated at 50,000 warriors and 200,000 Bedouins, were sent by the Fatimids to Ifriqiya in 1051-1052.",
+            "The Hilal tribes received land grants (iqtâ') from the Fatimid caliph.",
+            "The Hilalians' advance led to a devastating conflict with the Zirides, culminating in the fall of Kairouan after a five-year siege (1051-1056).",
+            "The Zirid dynasty fled to Mahdiya.",
+            "The Hilalian tribes expanded throughout the eastern Maghreb, taking control of the plains and coastal areas, while the Berbers retreated to the mountainous regions.",
+            "The fragmentation of Ifriqiya resulted in local authorities paying tribute to Hilalian chiefs.",
+            "The Hilalians' impact on the region was seen as both negative (political fragmentation, economic disruption) and positive (cultural exchange, demographic shift).",
+            "Some historians argued that the Hilalian migrations were a consequence of the weakness of the urban centers in North Africa.",
+            "The Hilalian tribes' arrival marked a turning point in the history of the Maghreb, introducing new dialects and impacting the cultural landscape of the region.",
+            "The Hilalian tribes were eventually integrated into the Berber population, leading to a significant cultural and ethnic exchange.",
+            "The arrival of the Hilalians marked a notable shift from classic Arabic to regional, vernacular dialects infused with Berber influences.",
+            "Despite initial conflicts, some later Berbers and the Hilal tribes formed alliances and/or sought partnerships to maintain their respective power."
+          ]
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/gs/resourceProxy?an=3086650&publisher=FZ1670",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/gs/resourceProxy?an=3086650&publisher=FZ1670",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/gs/resourceProxy?an=3086650&publisher=FZ1670",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 13173,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 3293,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 13173,
+          "truncated_length_chars": 13173
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source is a book catalog entry for a work titled \"Dynamiques religieuses et territoires du sacré au Maghreb médiéval.\"  Its focus is on religious dynamics and sacred territories in medieval Maghreb, not specifically on the conflicts between the Fatimids and Umayyads over the region."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/gs/resourceProxy?an=2206641&publisher=FR2550",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/gs/resourceProxy?an=2206641&publisher=FR2550",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/gs/resourceProxy?an=2206641&publisher=FR2550",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 34668,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 8667,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 34668,
+          "truncated_length_chars": 34668
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source is a table of contents and metadata for a scholarly article collection, focusing on medieval Sardinia and its relations with the Maghreb.  It does not contain any information directly about the conflicts between the Fatimids and the Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/gs/resourceProxy?an=2516731&publisher=FZ1523",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/gs/resourceProxy?an=2516731&publisher=FZ1523",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/gs/resourceProxy?an=2516731&publisher=FZ1523",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 18559,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 4639,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 18559,
+          "truncated_length_chars": 18559
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a catalog entry for a book about the legitimization of power in medieval Maghreb. While it touches on historical figures and periods in the region, it does not specifically address the conflicts between the Fatimids and Umayyads for control of Morocco.  The focus is on broader themes of political and religious legitimization."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://brill.com/view/journals/arab/69/1-2/article-p6_3.xml",
+        "original_source_metadata": {
+          "original_item_url": "https://brill.com/view/journals/arab/69/1-2/article-p6_3.xml",
+          "source_type": "main_url",
+          "source_url": "https://brill.com/view/journals/arab/69/1-2/article-p6_3.xml",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 790021,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 197505,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 790021,
+          "truncated_length_chars": 790021
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is an obituary for Pierre Guichard, a historian, and discusses his work and personal recollections of meetings with other scholars.  It does not focus on the conflict between the Fatimids and Umayyads in the Maghreb, but rather on broader topics of medieval Islamic history, particularly in al-Andalus."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://brill.com/downloadpdf/view/journals/arab/69/1-2/article-p6_3.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://brill.com/view/journals/arab/69/1-2/article-p6_3.xml",
+          "source_type": "linked_pdf",
+          "source_url": "https://brill.com/downloadpdf/view/journals/arab/69/1-2/article-p6_3.pdf",
+          "link_text": "Download PDF",
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 16088,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 4022,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 16088,
+          "truncated_length_chars": 16088
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a personal tribute to Pierre Guichard, a historian, and focuses on his scholarly work and influence on the author's career in the field of Islamic history in the Iberian Peninsula, particularly Al-Andalus. It does not directly address the conflicts between the Fatimids and Umayyads in the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.persee.fr/doc/shmes_1261-9078_1991_act_20_1_1516",
+        "original_source_metadata": {
+          "original_item_url": "https://www.persee.fr/doc/shmes_1261-9078_1991_act_20_1_1516",
+          "source_type": "main_url",
+          "source_url": "https://www.persee.fr/doc/shmes_1261-9078_1991_act_20_1_1516",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 40509,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 10127,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 40509,
+          "truncated_length_chars": 40509
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a French article about the history of Arab-Muslim studies in the medieval period and the legacy of Orientalism.  It does not discuss the conflicts between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|http://www.luttedeclasse.org/dossier24/politique_mondiale_190114.pdf",
+        "original_source_metadata": {
+          "original_item_url": "http://www.luttedeclasse.org/dossier24/politique_mondiale_190114.pdf",
+          "source_type": "main_url",
+          "source_url": "http://www.luttedeclasse.org/dossier24/politique_mondiale_190114.pdf",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 44106,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 11026,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 44106,
+          "truncated_length_chars": 44106
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text discusses Bernard Lewis's views on the Arab Spring and broader geopolitical issues related to the Middle East and US foreign policy.  It does not focus on the conflicts between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://journals.openedition.org/remmm/7512",
+        "original_source_metadata": {
+          "original_item_url": "https://journals.openedition.org/remmm/7512",
+          "source_type": "main_url",
+          "source_url": "https://journals.openedition.org/remmm/7512",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 143496,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 35874,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 143496,
+          "truncated_length_chars": 143496
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a review of a book about water management strategies in the Middle East, covering a broad range of geographical areas and historical periods. It does not contain any information directly related to the conflicts between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/gs/resourceProxy?an=5136565&publisher=FZ2990",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/gs/resourceProxy?an=5136565&publisher=FZ2990",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/gs/resourceProxy?an=5136565&publisher=FZ2990",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 10474,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 2618,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 10474,
+          "truncated_length_chars": 10474
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a book catalog entry for a 1985 book titled 'Radicalismes islamiques' (Islamic Radicalisms), focusing on Morocco, Pakistan, India, Yugoslavia, and Mali.  The content of the book catalog does not describe any conflict between the Fatimids and Umayyads in the Maghreb.  It is not directly relevant to the requested historical event."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/it/resources/an/4739385",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/it/resources/an/4739385",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/it/resources/an/4739385",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 18878,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 4719,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 18878,
+          "truncated_length_chars": 18878
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is about constitutional interpretation in Central Asian Islam, focusing on the post-Soviet era. It does not contain any information pertaining to the Fatimid-Umayyad conflicts in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.academia.edu/download/50836165/59SigaRachgoun.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://www.academia.edu/download/50836165/59SigaRachgoun.pdf",
+          "source_type": "main_url",
+          "source_url": "https://www.academia.edu/download/50836165/59SigaRachgoun.pdf",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 3623,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 905,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 3623,
+          "truncated_length_chars": 3623
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a webpage for Academia.edu, showing sign-up and login options.  It contains no historical content related to the conflict between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://journals.openedition.org/mcv/7277",
+        "original_source_metadata": {
+          "original_item_url": "https://journals.openedition.org/mcv/7277",
+          "source_type": "main_url",
+          "source_url": "https://journals.openedition.org/mcv/7277",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 137964,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 34491,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 137964,
+          "truncated_length_chars": 137964
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source is a review of a book about the historical understanding of Ifriqiya through Arabic sources. It discusses various aspects of the region's past, including Carthage and urban development, but doesn't focus on the conflicts between the Fatimids and the Umayyads in the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://search.proquest.com/openview/aa7bb998070f329a46545853b8c40731/1?pq-origsite=gscholar&cbl=386613",
+        "original_source_metadata": {
+          "original_item_url": "https://search.proquest.com/openview/aa7bb998070f329a46545853b8c40731/1?pq-origsite=gscholar&cbl=386613",
+          "source_type": "main_url",
+          "source_url": "https://search.proquest.com/openview/aa7bb998070f329a46545853b8c40731/1?pq-origsite=gscholar&cbl=386613",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 9011,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 2252,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 9011,
+          "truncated_length_chars": 9011
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is about Libya and Muammar Gaddafi, a completely unrelated topic to the Fatimid-Umayyad conflicts in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://core.ac.uk/download/pdf/52306066.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://core.ac.uk/download/pdf/52306066.pdf",
+          "source_type": "main_url",
+          "source_url": "https://core.ac.uk/download/pdf/52306066.pdf",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 28357,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 7089,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 28357,
+          "truncated_length_chars": 28357
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text focuses on the historical role of Tripoli as a trading port in the late Middle Ages, discussing its position in intercontinental trade networks and relations with various powers (including Christians), specifically during the period from the 11th to 15th centuries. It does not directly address the conflicts between the Fatimids and the Umayyads in the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://journals.openedition.org/chrhc/14178",
+        "original_source_metadata": {
+          "original_item_url": "https://journals.openedition.org/chrhc/14178",
+          "source_type": "main_url",
+          "source_url": "https://journals.openedition.org/chrhc/14178",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 501070,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 125267,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 501070,
+          "truncated_length_chars": 501070
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is about the history of Christians in the Middle East, focusing on coexistence and inter-influences between Christianity, Islam, and Judaism. It does not contain any information directly related to the conflicts between the Fatimids and Umayyads over North Africa (al-Maghrib)."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://journals.openedition.org/remmm/22147",
+        "original_source_metadata": {
+          "original_item_url": "https://journals.openedition.org/remmm/22147",
+          "source_type": "main_url",
+          "source_url": "https://journals.openedition.org/remmm/22147",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 346698,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 86674,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 346698,
+          "truncated_length_chars": 346698
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source is a biographical article about Christophe Picard, a historian.  While the article mentions his research on the Islamic world, specifically the history of ports and maritime activity in the medieval Mediterranean, and includes some of his publications, it does not focus on the conflicts between the Fatimids and the Umayyads over Morocco. The article is about Picard's broader historical work and scholarship rather than the specific conflict."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.persee.fr/doc/mom_0766-0510_1983_act_4_1_1958",
+        "original_source_metadata": {
+          "original_item_url": "https://www.persee.fr/doc/mom_0766-0510_1983_act_4_1_1958",
+          "source_type": "main_url",
+          "source_url": "https://www.persee.fr/doc/mom_0766-0510_1983_act_4_1_1958",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 53405,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 13351,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 53405,
+          "truncated_length_chars": 53405
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a conference paper discussing medieval settlement patterns in the Mediterranean, focusing on general comparisons between Byzantine, Islamic, and Christian cultures.  It does not specifically address the conflicts between the Fatimids and Umayyads in the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://brill.com/downloadpdf/edcollchap/book/9789004460089/BP000013.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://brill.com/downloadpdf/edcollchap/book/9789004460089/BP000013.pdf",
+          "source_type": "main_url",
+          "source_url": "https://brill.com/downloadpdf/edcollchap/book/9789004460089/BP000013.pdf",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 130439,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 32609,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 130439,
+          "truncated_length_chars": 130439
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a table of contents and product information from a book on modern Arabic historical scholarship. It does not contain any information directly related to the conflicts between the Fatimids and Umayyads in the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://scholar.archive.org/work/y2ebpt2cbbds7cq2izrr6o2wcq/access/wayback/http://classiques.uqac.ca/contemporains/helly_denise/occidentalisme_et_islamisme/occidentalisme_et_islamisme.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://scholar.archive.org/work/y2ebpt2cbbds7cq2izrr6o2wcq/access/wayback/http://classiques.uqac.ca/contemporains/helly_denise/occidentalisme_et_islamisme/occidentalisme_et_islamisme.pdf",
+          "source_type": "main_url",
+          "source_url": "https://scholar.archive.org/work/y2ebpt2cbbds7cq2izrr6o2wcq/access/wayback/http://classiques.uqac.ca/contemporains/helly_denise/occidentalisme_et_islamisme/occidentalisme_et_islamisme.pdf",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 65349,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 16337,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 65349,
+          "truncated_length_chars": 65349
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source is an academic article from 2002 analyzing the negative portrayal of Islam in the West following the September 11th attacks, focusing on concepts like 'Occidentalism' and 'Islamophobia.'  It does not discuss the Fatimid-Umayyad conflicts in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/it/resources/an/5094188",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/it/resources/an/5094188",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/it/resources/an/5094188",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 14777,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 3694,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 14777,
+          "truncated_length_chars": 14777
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a book description and cataloging information, discussing the relationship between state and tribe in contemporary Arab societies,  not focusing on the historical conflicts between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://link.springer.com/content/pdf/10.1007/978-1-4020-5069-5_6.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://link.springer.com/content/pdf/10.1007/978-1-4020-5069-5_6.pdf",
+          "source_type": "main_url",
+          "source_url": "https://link.springer.com/content/pdf/10.1007/978-1-4020-5069-5_6.pdf",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 33590,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 8397,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 33590,
+          "truncated_length_chars": 33590
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a chapter on the theological and aesthetic foundations of Islamic architecture.  It discusses philosophical reflections on space and place in Islam but does not address the conflict between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.academia.edu/download/57714244/blago-lo.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://www.academia.edu/download/57714244/blago-lo.pdf",
+          "source_type": "main_url",
+          "source_url": "https://www.academia.edu/download/57714244/blago-lo.pdf",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 3623,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 905,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 3623,
+          "truncated_length_chars": 3623
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a webpage interface for Academia.edu, and does not contain any historical content related to the conflict between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://hal.science/hal-03262840/document",
+        "original_source_metadata": {
+          "original_item_url": "https://hal.science/hal-03262840/document",
+          "source_type": "main_url",
+          "source_url": "https://hal.science/hal-03262840/document",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 82183,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 20545,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 82183,
+          "truncated_length_chars": 82183
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text discusses Muslim intellectuals' engagement with human sciences and interreligious dialogue during the 1960s and 1970s, focusing on their views on faith and contemporary thought, particularly from a Francophone perspective.  It does not address the Fatimid-Umayyad conflicts in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/gs/resourceProxy?an=5086701&publisher=FZ2990",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/gs/resourceProxy?an=5086701&publisher=FZ2990",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/gs/resourceProxy?an=5086701&publisher=FZ2990",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 12915,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 3228,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 12915,
+          "truncated_length_chars": 12915
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a book description about economic issues in Arab and Black African countries, specifically about structural adjustment and social exclusion.  It mentions a UN social summit in 1995, but does not address the conflicts between Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://shs.hal.science/halshs-01926578/document",
+        "original_source_metadata": {
+          "original_item_url": "https://shs.hal.science/halshs-01926578/document",
+          "source_type": "main_url",
+          "source_url": "https://shs.hal.science/halshs-01926578/document",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 82071,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 20517,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 82071,
+          "truncated_length_chars": 82071
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text discusses the evolution of the sugar master profession in the medieval Mediterranean, focusing on its development from apothecaries and grocers.  It does not address the conflicts between the Fatimids and Umayyads in the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/gs/resourceProxy?an=2287605&publisher=FR2550",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/gs/resourceProxy?an=2287605&publisher=FR2550",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/gs/resourceProxy?an=2287605&publisher=FR2550",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 20182,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 5045,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 20182,
+          "truncated_length_chars": 20182
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a catalog entry for a book about the history of Bougie (Bejaia) in Algeria, focusing on its economic and commercial aspects during the period 1067-1510.  While historical, it does not directly address the conflicts between the Fatimids and Umayyads over North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/it/resources/an/5101123",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/it/resources/an/5101123",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/it/resources/an/5101123",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 14737,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 3684,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 14737,
+          "truncated_length_chars": 14737
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a book description from an online bookstore, discussing general topics about African history and future prospects, not focusing on the conflicts between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://www.torrossa.com/it/resources/an/3126068",
+        "original_source_metadata": {
+          "original_item_url": "https://www.torrossa.com/it/resources/an/3126068",
+          "source_type": "main_url",
+          "source_url": "https://www.torrossa.com/it/resources/an/3126068",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 46522,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 11630,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 46522,
+          "truncated_length_chars": 46522
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a catalogue description for a book titled 'Islam i Cristiandat: civilitzacions al món medieval' focusing on the relationship between Islam and Christianity in the medieval world.  While it mentions historical context, it does not specifically address the conflict between the Fatimids and Umayyads over North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://shs.hal.science/halshs-04555751/",
+        "original_source_metadata": {
+          "original_item_url": "https://shs.hal.science/halshs-04555751/",
+          "source_type": "main_url",
+          "source_url": "https://shs.hal.science/halshs-04555751/",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 56248,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 14062,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 56248,
+          "truncated_length_chars": 56248
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a search page and metadata for a document about the Mediterranean, not focusing on the conflicts between the Fatimids and Umayyads in North Africa."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://shs.hal.science/halshs-04555751v1/file/ge%CC%81o%20de%20la%20Me%CC%81diterrane%CC%81e.pdf",
+        "original_source_metadata": {
+          "original_item_url": "https://shs.hal.science/halshs-04555751/",
+          "source_type": "linked_pdf",
+          "source_url": "https://shs.hal.science/halshs-04555751v1/file/ge%CC%81o%20de%20la%20Me%CC%81diterrane%CC%81e.pdf",
+          "link_text": "Télécharger le fichier",
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 156099,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 39024,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 156099,
+          "truncated_length_chars": 156099
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text discusses the historical interactions and cultural dynamics of civilizations surrounding the Mediterranean, but focuses on broader themes of cultural encounters, religious history, and political and social structures of the Mediterranean region in general. It does not directly address the specific conflicts between the Fatimids and Umayyads in the Maghreb."
+        },
+        "processing_status": "success",
+        "error_message": null
+      },
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|http://multimedia.fnac.com/multimedia/editorial/pdf/9782811107314.pdf",
+        "original_source_metadata": {
+          "original_item_url": "http://multimedia.fnac.com/multimedia/editorial/pdf/9782811107314.pdf",
+          "source_type": "main_url",
+          "source_url": "http://multimedia.fnac.com/multimedia/editorial/pdf/9782811107314.pdf",
+          "link_text": null,
+          "original_language_section": "fr"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 300447,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 75111,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 300447,
+          "truncated_length_chars": 300447
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source text is a book about women's writing in North Africa, encompassing various historical periods and cultural expressions.  It does not focus on the conflicts between the Fatimids and Umayyads in Morocco."
+        },
+        "processing_status": "success",
+        "error_message": null
+      }
+    ],
+    "es": [
+      {
+        "source_uid": "C:\\Users\\ilias\\Documents\\GitHub\\PFA-Scraping-Morocco-History\\Back-End\\src\\Data\\Step3\\data_filtered_final\\الفتح_الإسلامي_والسلالات_المبكرة\\صراعات_الفاطميين_والأمويين_على_المغرب\\صراعات_الفاطميين_والأمويين_على_المغرب.json|https://journals.openedition.org/bcai/399",
+        "original_source_metadata": {
+          "original_item_url": "https://journals.openedition.org/bcai/399",
+          "source_type": "main_url",
+          "source_url": "https://journals.openedition.org/bcai/399",
+          "link_text": null,
+          "original_language_section": "es"
+        },
+        "processing_metadata": {
+          "text_truncated": false,
+          "original_text_length_chars": 241889,
+          "truncated_text_length_chars": null,
+          "max_chars_allowed": 4183448,
+          "estimated_tokens": 60472,
+          "api_model_used": "gemini-1.5-flash-8b",
+          "api_key_index_used": 1,
+          "truncated": false,
+          "original_length_chars": 241889,
+          "truncated_length_chars": 241889
+        },
+        "llm_processed_output": {
+          "relevance_status": "irrelevant",
+          "relevance_reason": "The source is a book review about a work by Dominique Valérian on trade networks in medieval Maghreb. While it discusses the historical context of ports and trade in the region, it does not directly address the conflicts between the Fatimids and the Umayyads, which is the focus of the query."
+        },
+        "processing_status": "success",
+        "error_message": null
+      }
+    ]
+  }
+}
