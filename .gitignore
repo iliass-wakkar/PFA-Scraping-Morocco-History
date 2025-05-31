@@ -175,4 +175,4 @@ cython_debug/
 
 ./Back-End/src/Data
 ./Back-End/venv
-./Back-End/src/IA_modele_treat/DATA_IA
+./Back-End/src/BigData_Process
