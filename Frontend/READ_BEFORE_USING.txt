@@ -1,0 +1,3 @@
+Change ip address in Home.jsx
+Variable name : ApiUrl
+Download packages using : npm i or npm install
