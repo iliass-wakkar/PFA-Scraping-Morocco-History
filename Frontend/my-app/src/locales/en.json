@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "title1": "History of Moroccan Wars",
+    "desc": "Discover the rich military history of Morocco through the ages, from ancient battles to modern conflicts.",
+    "scroll": "Scroll down",
+    "cta": "Start the Journey"
+  },
+  "about": {
+    "title": "About TarikhAlHuroob",
+    "desc": "A digital chronicle dedicated to preserving and sharing the rich history of Moroccan wars. Our platform brings historical narratives to life through modern technology and thoughtful design.",
+    "features": [
+      {
+        "title": "Historical Accuracy",
+        "description": "Thoroughly researched and verified historical content"
+      },
+      {
+        "title": "Modern Technology",
+        "description": "Built with cutting-edge web technologies"
+      },
+      {
+        "title": "Cultural Heritage",
+        "description": "Preserving Morocco's rich military history"
+      }
+    ],
+    "team": "Meet Our Team",
+    "developers": [
+      {
+        "role": "Project Lead & Developer",
+        "bio": "Passionate about creating digital solutions that preserve and celebrate Moroccan history. Specializing in React and modern web technologies."
+      },
+      {
+        "role": "Developer & UI/UX Designer",
+        "bio": "Dedicated to creating beautiful, intuitive interfaces that bring historical narratives to life. Focused on user experience and responsive design."
+      }
+    ]
+  }
+} 

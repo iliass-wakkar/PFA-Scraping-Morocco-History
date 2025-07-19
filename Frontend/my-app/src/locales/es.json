@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "title1": "Historia de las guerras marroquíes",
+    "desc": "Descubre la rica historia militar de Marruecos a través de los siglos, desde batallas antiguas hasta conflictos modernos.",
+    "scroll": "Desplázate hacia abajo",
+    "cta": "Comenzar el viaje"
+  },
+  "about": {
+    "title": "Acerca de TarikhAlHuroob",
+    "desc": "Una crónica digital dedicada a preservar y compartir la rica historia de las guerras marroquíes. Nuestra plataforma da vida a las narrativas históricas a través de la tecnología moderna y un diseño cuidadoso.",
+    "features": [
+      {
+        "title": "Precisión histórica",
+        "description": "Contenido histórico minuciosamente investigado y verificado"
+      },
+      {
+        "title": "Tecnología moderna",
+        "description": "Construido con tecnologías web de vanguardia"
+      },
+      {
+        "title": "Patrimonio cultural",
+        "description": "Preservando la rica historia militar de Marruecos"
+      }
+    ],
+    "team": "Conoce a nuestro equipo",
+    "developers": [
+      {
+        "role": "Líder del proyecto y desarrollador",
+        "bio": "Apasionado por crear soluciones digitales que preserven y celebren la historia marroquí. Especializado en React y tecnologías web modernas."
+      },
+      {
+        "role": "Desarrollador y diseñador UI/UX",
+        "bio": "Dedicado a crear interfaces hermosas e intuitivas que dan vida a las narrativas históricas. Enfocado en la experiencia del usuario y el diseño responsivo."
+      }
+    ]
+  }
+} 

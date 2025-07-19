@@ -173,6 +173,6 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-./Back-End/src/Data
-./Back-End/venv
-./Back-End/src/BigData_Process
+./backend/src/BigData_Process
+./backend/venv
+./backend/src/venv
