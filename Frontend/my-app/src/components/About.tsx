@@ -3,6 +3,7 @@ import { GiFlexibleStar } from 'react-icons/gi';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import Image from 'next/image';
 
 const About = () => {
   const { t } = useTranslation();
@@ -132,9 +133,11 @@ const About = () => {
               >
                 <div className="flex flex-col md:flex-row items-center gap-8">
                   <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-green-500">
-                    <img
+                    <Image
                       src={dev.image}
                       alt={dev.name}
+                      width={128}
+                      height={128}
                       className="w-full h-full object-cover"
                     />
                   </div>

@@ -82,7 +82,7 @@ export const useSearchEvents = (query: string, language: string = 'ar') => {
   const [data, setData] = useState<ApiBigEvent[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   const search = useCallback(async (searchQuery: string) => {
     if (!searchQuery.trim()) {
@@ -179,7 +179,7 @@ export const useApiStatus = () => {
       setChecking(true);
       await ApiService.getWelcomeMessage();
       setIsConnected(true);
-    } catch (err) {
+    } catch {
       setIsConnected(false);
     } finally {
       setChecking(false);

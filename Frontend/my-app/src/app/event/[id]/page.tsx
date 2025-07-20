@@ -3,12 +3,17 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useAllEvents } from "../../../hooks/useApi";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { TimelineEvent } from "../../../components/Timeline";
 import { useLanguage } from "../../../contexts/LanguageContext";
 // import { useScrollDirection } from "../../../hooks/useScrollDirection"; // If you implement scroll direction
 
 export default function EventDetailPage() {
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const params = useParams();
   const eventId = params.id as string;
   const { language } = useLanguage();
@@ -23,12 +28,16 @@ export default function EventDetailPage() {
   // Instead, use a local state for each open dropdown
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-  // Simple outside click handler: close dropdown on any document click if open
+  // Ref for the open dropdown
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  // Only close dropdown when clicking outside
   useEffect(() => {
     if (!openDropdown) return;
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest('button[class*="text-green-400"]')) {
+      if (dropdownRef.current && dropdownRef.current.contains(target)) {
+        // Clicked inside the dropdown, do not close
         return;
       }
       setOpenDropdown(null);
@@ -41,99 +50,33 @@ export default function EventDetailPage() {
   const { data: apiData, loading, error, refresh } = useAllEvents(language);
   const [event, setEvent] = useState<TimelineEvent | null>(null);
 
+  
+
   useEffect(() => {
     if (apiData && eventId) {
-      // Decode the URL-encoded event ID
-      const decodedEventId = decodeURIComponent(eventId);
-      console.log('Decoded Event ID:', decodedEventId);
-      console.log('API Data:', apiData);
-      
-      // Find the event by matching the event name and indices
-      // The format is: event-name-bigEventIndex-eventIndex
-      const parts = decodedEventId.split('-');
-      
-      if (parts.length >= 3) {
-        // Get the last two parts as indices
-        const bigEventIndex = parseInt(parts[parts.length - 2]);
-        const eventIndex = parseInt(parts[parts.length - 1]);
-        
-        console.log('Parsed indices:', { bigEventIndex, eventIndex });
-        
-        if (!isNaN(bigEventIndex) && !isNaN(eventIndex) && 
-            bigEventIndex >= 0 && bigEventIndex < apiData.length) {
-          const bigEvent = apiData[bigEventIndex];
-          if (eventIndex >= 0 && eventIndex < bigEvent.events.length) {
-            const apiEvent = bigEvent.events[eventIndex];
-            
-            // Transform the API event to TimelineEvent format
-            const timelineEvent: TimelineEvent = {
-              event_name: apiEvent.event_name,
-              article_title: apiEvent.article_title,
-              date: {
-                milady: {
-                  start: apiEvent.date?.milady?.start || 0,
-                  end: apiEvent.date?.milady?.end || apiEvent.date?.milady?.start || 0
-                },
-                hijry: apiEvent.date?.hijri ? {
-                  start: apiEvent.date.hijri.start,
-                  end: apiEvent.date.hijri.end || apiEvent.date.hijri.start,
-                  approx: false
-                } : undefined
-              },
-              sections: apiEvent.sections.map(section => ({
-                subtitle: section.subtitle,
-                paragraphs: section.paragraphs.map(paragraph => ({
-                  paragraph_id: paragraph.paragraph_id || `${section.subtitle}-${paragraph.text.substring(0, 10)}`,
-                  text: paragraph.text,
-                  source_URLs: paragraph.source_URLs || []
-                }))
-              }))
-            };
-            
-            console.log('Found and transformed event:', timelineEvent);
-            setEvent(timelineEvent);
-            return;
-          }
-        }
-      }
-      
-      // Fallback: try to find by event name if parsing fails
-      console.log('Trying fallback search by event name...');
-      for (let bigEventIndex = 0; bigEventIndex < apiData.length; bigEventIndex++) {
-        const bigEvent = apiData[bigEventIndex];
+      let foundEvent: TimelineEvent | null = null;
+      const searchedName = decodeURIComponent(eventId);
+      const allNames: string[] = [];
+      outer: for (const bigEvent of apiData) {
         for (let eventIndex = 0; eventIndex < bigEvent.events.length; eventIndex++) {
-          const apiEvent = bigEvent.events[eventIndex];
-          const expectedEventId = getEventId({
-            event_name: apiEvent.event_name,
-            article_title: apiEvent.article_title,
-            date: {
-              milady: {
-                start: apiEvent.date?.milady?.start || 0,
-                end: apiEvent.date?.milady?.end || apiEvent.date?.milady?.start || 0
-              }
-            },
-            sections: []
-          } as TimelineEvent, bigEventIndex, eventIndex);
-          
-          if (expectedEventId === decodedEventId) {
-            console.log('Found event by fallback:', { bigEventIndex, eventIndex });
-            
-            // Transform the API event to TimelineEvent format
-            const timelineEvent: TimelineEvent = {
-              event_name: apiEvent.event_name,
-              article_title: apiEvent.article_title,
+          const event = bigEvent.events[eventIndex];
+          allNames.push(event.event_name);
+          if (event.event_name === searchedName) {
+            foundEvent = {
+              event_name: event.event_name,
+              article_title: event.article_title,
               date: {
                 milady: {
-                  start: apiEvent.date?.milady?.start || 0,
-                  end: apiEvent.date?.milady?.end || apiEvent.date?.milady?.start || 0
+                  start: event.date?.milady?.start || 0,
+                  end: event.date?.milady?.end || event.date?.milady?.start || 0
                 },
-                hijry: apiEvent.date?.hijri ? {
-                  start: apiEvent.date.hijri.start,
-                  end: apiEvent.date.hijri.end || apiEvent.date.hijri.start,
+                hijry: event.date?.hijri ? {
+                  start: event.date.hijri.start,
+                  end: event.date.hijri.end || event.date.hijri.start,
                   approx: false
                 } : undefined
               },
-              sections: apiEvent.sections.map(section => ({
+              sections: event.sections.map(section => ({
                 subtitle: section.subtitle,
                 paragraphs: section.paragraphs.map(paragraph => ({
                   paragraph_id: paragraph.paragraph_id || `${section.subtitle}-${paragraph.text.substring(0, 10)}`,
@@ -142,21 +85,16 @@ export default function EventDetailPage() {
                 }))
               }))
             };
-            
-            setEvent(timelineEvent);
-            return;
+            break outer;
           }
         }
       }
-      
-      setEvent(null);
+      setEvent(foundEvent);
     }
   }, [apiData, eventId]);
 
   // Helper function to generate event ID (same as in Timeline and Navbar)
-  const getEventId = (event: TimelineEvent, bigEventIndex: number, eventIndex: number) => {
-    return `${event.event_name.replace(/\s+/g, '-').toLowerCase()}-${bigEventIndex}-${eventIndex}`;
-  };
+  // Removed getEventId as it is no longer used
 
   // Toggle handler for each paragraph
   const toggleSources = (paragraphId: string) => {
@@ -207,19 +145,6 @@ export default function EventDetailPage() {
           </div>
           <h2 className="text-xl font-semibold text-white mb-2">Event Not Found</h2>
           <p className="text-gray-400 mb-4">The requested event could not be found.</p>
-          <div className="text-sm text-gray-500 mb-4 space-y-2">
-            <div>Debug: Event ID: {eventId}</div>
-            <div>Decoded: {decodeURIComponent(eventId)}</div>
-            <div>Language: {language}</div>
-            <div>API Data Available: {apiData ? `Yes (${apiData.length} big events)` : 'No'}</div>
-            {apiData && (
-              <div className="text-xs">
-                Available events: {apiData.map((be, i) => 
-                  `${be.big_event_name} (${be.events.length} events)`
-                ).join(', ')}
-              </div>
-            )}
-          </div>
           <Link href="/timeline" className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
             Back to Timeline
           </Link>
@@ -293,6 +218,8 @@ export default function EventDetailPage() {
                       {openDropdown === paragraph.paragraph_id && (
                         <div 
                           className="absolute left-0 mt-2 w-72 bg-[#141115] border border-green-500/30 rounded-xl shadow-lg p-4 z-20"
+                          ref={dropdownRef}
+                          onMouseDown={e => e.stopPropagation()}
                         >
                           <h3 className="text-green-400 font-bold mb-2 text-sm">Sources</h3>
                           <ul className="list-disc list-inside text-gray-300 text-sm">

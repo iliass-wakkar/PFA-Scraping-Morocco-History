@@ -17,17 +17,6 @@ export default function TimelinePage() {
   const { data: apiData, loading, error, refresh } = useAllEvents(language);
   const { searchQuery } = useSearch();
   
-  // Debug logging
-  useEffect(() => {
-    console.log('API Data received:', apiData);
-    console.log('API Data type:', typeof apiData);
-    console.log('Is Array:', Array.isArray(apiData));
-    if (apiData) {
-      console.log('API Data structure:', JSON.stringify(apiData, null, 2));
-      console.log('API Data length:', Array.isArray(apiData) ? apiData.length : 'Not an array');
-    }
-  }, [apiData]);
-  
   // Transform API data to big events structure with better error handling
   const bigEvents = (() => {
     if (!apiData) {
@@ -59,9 +48,6 @@ export default function TimelinePage() {
       return [];
     }
   })();
-
-  console.log('Final bigEvents array:', bigEvents);
-  console.log('BigEvents length:', bigEvents.length);
 
   if (loading) {
     return (

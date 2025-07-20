@@ -41,11 +41,6 @@ export interface TimelineProps {
   bigEvents: TimelineBigEvent[];
 }
 
-// Helper to generate eventId for routing
-const getEventId = (event: TimelineEvent, bigEventIndex: number, eventIndex: number) => {
-  return `${event.event_name.replace(/\s+/g, '-').toLowerCase()}-${bigEventIndex}-${eventIndex}`;
-};
-
 const Timeline: React.FC<TimelineProps> = ({ bigEvents }) => {
   // Get the latest event's end year for HistoryLineEnd
   const allEvents = bigEvents.flatMap(be => be.events);
@@ -76,20 +71,23 @@ const Timeline: React.FC<TimelineProps> = ({ bigEvents }) => {
             {bigEvent.events
               .slice()
               .sort((a, b) => a.date.milady.start - b.date.milady.start)
-              .map((event, eventIndex) => (
-                <HistoryLineMiddle
-                  key={event.event_name + bigEventIndex + eventIndex}
-                  event={{
-                    event_name: event.event_name,
-                    article_title: event.article_title,
-                    date: event.date.milady.start.toString(),
-                    sections: event.sections,
-                  }}
-                  index={eventIndex}
-                  date={event.date.milady.start.toString()}
-                  eventId={getEventId(event, bigEventIndex, eventIndex)}
-                />
-              ))}
+              .map((event, eventIndex) => {
+                const eventId = encodeURIComponent(event.event_name);
+                return (
+                  <HistoryLineMiddle
+                    key={event.event_name + bigEventIndex + eventIndex}
+                    event={{
+                      event_name: event.event_name,
+                      article_title: event.article_title,
+                      date: event.date.milady.start.toString(),
+                      sections: event.sections,
+                    }}
+                    index={eventIndex}
+                    date={event.date.milady.start.toString()}
+                    eventId={eventId}
+                  />
+                );
+              })}
         </div>
       ))}
       {/* End of Timeline */}

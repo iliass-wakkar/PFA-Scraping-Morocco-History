@@ -87,7 +87,7 @@ export const transformApiBigEventToComponentFormat = (apiBigEvent: ApiBigEvent):
   return {
     big_event_name: apiBigEvent.big_event_name,
     events: apiBigEvent.events.map(transformApiEventToTimelineEvent),
-    score: apiBigEvent.score
+    score: 'score' in apiBigEvent && typeof apiBigEvent.score === 'number' ? apiBigEvent.score as number : undefined
   };
 };
 
@@ -95,17 +95,10 @@ export const transformApiBigEventToComponentFormat = (apiBigEvent: ApiBigEvent):
 export const transformApiDataToBigEvents = (apiBigEvents: ApiBigEvent | ApiBigEvent[]): TimelineBigEvent[] => {
   const bigEvents: TimelineBigEvent[] = [];
   
-  console.log('transformApiDataToBigEvents input:', apiBigEvents);
-  console.log('transformApiDataToBigEvents input type:', typeof apiBigEvents);
-  console.log('transformApiDataToBigEvents is array:', Array.isArray(apiBigEvents));
-  
   // Handle both single object and array
   const eventsArray = Array.isArray(apiBigEvents) ? apiBigEvents : [apiBigEvents];
   
-  console.log('Events array length:', eventsArray.length);
-  
-  eventsArray.forEach((bigEvent, index) => {
-    console.log(`Processing big event ${index}:`, bigEvent);
+  eventsArray.forEach((bigEvent) => {
     
     // Handle the API response structure where events are nested in a "data" property
     let eventsToProcess: ApiBigEvent[] = [];
@@ -113,38 +106,28 @@ export const transformApiDataToBigEvents = (apiBigEvents: ApiBigEvent | ApiBigEv
     if (bigEvent && typeof bigEvent === 'object') {
       // Check if it's the API response structure with "data" property
       if ('data' in bigEvent && Array.isArray(bigEvent.data)) {
-        console.log(`Big event ${index} has data property with ${bigEvent.data.length} items`);
         eventsToProcess = bigEvent.data;
       } else if ('events' in bigEvent && Array.isArray(bigEvent.events)) {
         // Direct events structure
-        console.log(`Big event ${index} has direct events property with ${bigEvent.events.length} events`);
         eventsToProcess = [bigEvent as ApiBigEvent];
       } else {
-        console.log(`Big event ${index} has no valid data or events structure`);
       }
     }
     
     // Process the events
     eventsToProcess.forEach((eventData, eventIndex) => {
-      console.log(`Processing event data ${eventIndex}:`, eventData);
       
       if (eventData && 'events' in eventData && Array.isArray(eventData.events)) {
-        console.log(`Event data ${eventIndex} has ${eventData.events.length} events`);
         try {
           const transformedBigEvent = transformApiBigEventToComponentFormat(eventData);
-          console.log(`Transformed big event ${eventIndex}:`, transformedBigEvent);
           bigEvents.push(transformedBigEvent);
         } catch (err) {
           console.error(`Error transforming big event ${eventIndex}:`, err);
         }
       } else {
-        console.log(`Event data ${eventIndex} has no valid events array`);
       }
     });
   });
-  
-  console.log('Final bigEvents array:', bigEvents);
-  console.log('Final bigEvents length:', bigEvents.length);
   
   return bigEvents;
 };
@@ -168,7 +151,6 @@ export const findEventById = (events: TimelineEvent[], eventId: string): Timelin
   
   // We need at least 3 parts: event-name, bigEventIndex, eventIndex
   if (parts.length < 3) {
-    console.log('Invalid event ID format:', eventId);
     return null;
   }
   
@@ -178,22 +160,16 @@ export const findEventById = (events: TimelineEvent[], eventId: string): Timelin
   
   // Check if indices are valid numbers
   if (isNaN(bigEventIndex) || isNaN(eventIndex)) {
-    console.log('Invalid indices in event ID:', eventId);
     return null;
   }
-  
-  console.log('Looking for event with bigEventIndex:', bigEventIndex, 'eventIndex:', eventIndex);
-  console.log('Total events available:', events.length);
   
   // For now, we'll use a simple approach: find the event by its position in the flattened array
   // This assumes events are in the same order as they appear in the timeline
   if (eventIndex >= 0 && eventIndex < events.length) {
     const foundEvent = events[eventIndex];
-    console.log('Found event:', foundEvent?.event_name);
     return foundEvent;
   }
   
-  console.log('Event index out of range:', eventIndex, 'vs', events.length);
   return null;
 };
 

@@ -11,6 +11,7 @@ export interface ApiSection {
 }
 
 export interface ApiEvent {
+  _id?: { $oid: string };
   event_name: string;
   article_title: string;
   sections: ApiSection[];
@@ -47,10 +48,10 @@ const DEFAULT_LANGUAGE = 'ar'; // Changed to match LanguageContext default
 
 // Cache configuration
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-const cache = new Map<string, { data: any; timestamp: number }>();
+const cache = new Map<string, { data: unknown; timestamp: number }>();
 
 class ApiService {
-  private static async makeRequest<T>(
+  private static async makeRequest<T = unknown>(
     endpoint: string, 
     options: RequestInit = {}
   ): Promise<T> {
@@ -86,7 +87,7 @@ class ApiService {
     return Date.now() - timestamp < CACHE_DURATION;
   }
 
-  private static async getCachedOrFetch<T>(
+  private static async getCachedOrFetch<T = unknown>(
     endpoint: string, 
     params?: Record<string, string>
   ): Promise<T> {
@@ -94,7 +95,7 @@ class ApiService {
     const cached = cache.get(cacheKey);
 
     if (cached && this.isCacheValid(cached.timestamp)) {
-      return cached.data;
+      return cached.data as T; // Cast to the expected type
     }
 
     const paramString = params ? `?${new URLSearchParams(params).toString()}` : '';
@@ -107,16 +108,17 @@ class ApiService {
   // Get all historical events
   static async getAllEvents(language: string = DEFAULT_LANGUAGE): Promise<ApiBigEvent[]> {
     try {
-      const result = await this.getCachedOrFetch<any>('/historical-events/', { language });
-      
+      const result = await this.getCachedOrFetch<ApiResponse>(
+        '/historical-events/', { language }
+      );
       // Handle the new API response format with status and data
       if (result && result.status === 'success' && result.data) {
         return result.data;
       } else if (Array.isArray(result)) {
-        return result;
+        return result as unknown as ApiBigEvent[];
       } else if (result && typeof result === 'object') {
         // If it's a single object, wrap it in an array
-        return [result];
+        return [result as unknown as ApiBigEvent];
       } else {
         console.warn('Unexpected API response format:', result);
         return [];
@@ -133,26 +135,34 @@ class ApiService {
     language: string = DEFAULT_LANGUAGE
   ): Promise<ApiBigEvent> {
     const encodedPeriod = encodeURIComponent(periodName);
-    const result = await this.getCachedOrFetch<any>(
+    const result = await this.getCachedOrFetch<ApiResponse>(
       `/historical-events/${encodedPeriod}`, 
       { language }
     );
-    
     // Handle the new API response format
     if (result && result.status === 'success' && result.data) {
-      return result.data;
+      if (Array.isArray(result.data)) {
+        if (result.data.length > 0) {
+          return result.data[0];
+        } else {
+          throw new Error('No events found for this period');
+        }
+      } else {
+        return result.data as ApiBigEvent;
+      }
     }
-    return result;
+    throw new Error('Unexpected API response format for getEventsByPeriod');
   }
 
   // Search events
   static async searchEvents(query: string, language: string = DEFAULT_LANGUAGE): Promise<ApiBigEvent[]> {
     try {
-      const result = await this.getCachedOrFetch<any>('/historical-events/search', { 
-        q: query, 
-        language 
-      });
-      
+      const result = await this.getCachedOrFetch<ApiResponse>(
+        '/historical-events/search', { 
+          q: query, 
+          language 
+        }
+      );
       // Handle the new API response format
       if (result && result.status === 'success' && result.data) {
         return result.data;

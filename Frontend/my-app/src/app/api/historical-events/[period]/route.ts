@@ -1,13 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { databaseService } from '@/services/database';
 
-interface RouteParams {
-  params: {
-    period: string;
-  };
-}
-
-export async function GET(request: NextRequest, { params }: RouteParams) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function GET(request: NextRequest, context: any) {
+  const { params } = context;
   try {
     const { searchParams } = new URL(request.url);
     const language = searchParams.get('language') || 'ar';
