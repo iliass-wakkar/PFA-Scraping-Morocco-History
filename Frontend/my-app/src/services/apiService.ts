@@ -43,7 +43,7 @@ export interface ApiError {
 }
 
 // API Configuration - Updated to use local Next.js API
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000/api';
+const API_BASE_URL = '/api';
 const DEFAULT_LANGUAGE = 'ar'; // Changed to match LanguageContext default
 
 // Cache configuration
