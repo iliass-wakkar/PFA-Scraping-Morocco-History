@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import ApiService, { ApiBigEvent, ApiEvent } from '../services/apiService';
 
 // Hook for fetching all events
-export const useAllEvents = (language: string = 'en') => {
+export const useAllEvents = (language: string = 'ar') => {
   const [data, setData] = useState<ApiBigEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +39,7 @@ export const useAllEvents = (language: string = 'en') => {
 };
 
 // Hook for fetching events by period
-export const useEventsByPeriod = (periodName: string, language: string = 'en') => {
+export const useEventsByPeriod = (periodName: string, language: string = 'ar') => {
   const [data, setData] = useState<ApiBigEvent | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -78,7 +78,7 @@ export const useEventsByPeriod = (periodName: string, language: string = 'en') =
 };
 
 // Hook for searching events
-export const useSearchEvents = (query: string, language: string = 'en') => {
+export const useSearchEvents = (query: string, language: string = 'ar') => {
   const [data, setData] = useState<ApiBigEvent[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -124,7 +124,7 @@ export const useSearchEvents = (query: string, language: string = 'en') => {
 };
 
 // Hook for fetching a single event by ID
-export const useEventById = (eventId: string, language: string = 'en') => {
+export const useEventById = (eventId: string, language: string = 'ar') => {
   const [event, setEvent] = useState<ApiEvent | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

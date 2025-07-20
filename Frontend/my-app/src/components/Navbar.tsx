@@ -4,9 +4,10 @@ import { GiFlexibleStar } from "react-icons/gi";
 import { FaSearch } from "react-icons/fa";
 import { motion, AnimatePresence } from 'framer-motion';
 import i18n from '../i18n';
-import { useTimelineData } from '../contexts/TimelineDataContext';
 import { TimelineEvent } from './Timeline';
 import { useRouter } from 'next/navigation';
+import { useSearchEvents } from '../hooks/useApi';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Helper to generate eventId for routing (copied from Timeline.tsx)
 const getEventId = (event: TimelineEvent, bigEventIndex: number, eventIndex: number) => {
@@ -17,18 +18,17 @@ const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('homepage');
-    const [lang, setLang] = useState(typeof window !== 'undefined' ? localStorage.getItem("lang") || "en" : "en");
     const pathname = typeof window !== 'undefined' ? window.location.pathname : '/'; // fallback for SSR
     // Search UI states
     const [searchValue, setSearchValue] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
     const searchRef = useRef<HTMLDivElement>(null);
-    const { bigEvents } = useTimelineData();
-    // Instead of just TimelineEvent[], keep event, bigEventIndex, eventIndex
-    const [filteredEvents, setFilteredEvents] = useState<{ event: TimelineEvent; bigEventIndex: number; eventIndex: number }[]>([]);
-    const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
     const router = useRouter();
     const mobileMenuRef = useRef<HTMLDivElement>(null);
+    const { language, setLanguage } = useLanguage();
+    
+    // Use API search hook
+    const { data: searchResults, loading: searchLoading } = useSearchEvents(searchValue, language);
 
     useEffect(() => {
         // If on /timeline, always set activeSection to 'history'
@@ -70,42 +70,6 @@ const Navbar: React.FC = () => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [showDropdown]);
 
-    // Debounced search logic
-    useEffect(() => {
-        if (!showDropdown) return;
-        if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-        debounceTimeout.current = setTimeout(() => {
-            const query = searchValue.trim();
-            if (!query) {
-                setFilteredEvents([]);
-                return;
-            }
-            const isNumber = /^\d+$/.test(query);
-            const lowerQuery = query.toLowerCase();
-            // Flatten events with indices
-            const allEvents = bigEvents.flatMap((be, bigEventIndex) =>
-                be.events.map((event, eventIndex) => ({ event, bigEventIndex, eventIndex }))
-            );
-            const filtered: { event: TimelineEvent; bigEventIndex: number; eventIndex: number }[] = allEvents.filter(({ event }) => {
-                if (isNumber) {
-                    const year = parseInt(query, 10);
-                    return (
-                        event.date.milady.start === year ||
-                        event.date.milady.end === year
-                    );
-                } else {
-                    const inTitle = event.article_title.toLowerCase().includes(lowerQuery);
-                    const inFirstParagraph = event.sections[0]?.paragraphs[0]?.text?.toLowerCase().includes(lowerQuery);
-                    return inTitle || inFirstParagraph;
-                }
-            });
-            setFilteredEvents(filtered);
-        }, 400);
-        return () => {
-            if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-        };
-    }, [searchValue, bigEvents, showDropdown]);
-
     // Close mobile menu on outside click
     useEffect(() => {
         if (!isMenuOpen) return;
@@ -121,24 +85,40 @@ const Navbar: React.FC = () => {
     const scrollToSection = (sectionId: string) => {
         const isOnTimeline = pathname === '/timeline';
         const isOnEvent = pathname.startsWith('/event/');
+        
+        // Handle navigation from timeline or event pages
         if (isOnTimeline || isOnEvent) {
             if (sectionId === 'homepage') {
                 window.location.href = '/';
             } else if (sectionId === 'about') {
                 window.location.href = '/#about';
+            } else if (sectionId === 'history') {
+                // Already on timeline page, do nothing or refresh
+                if (isOnTimeline) {
+                    window.location.reload();
+                } else {
+                    window.location.href = '/timeline';
+                }
             }
             setIsMenuOpen(false);
             return;
         }
+        
+        // Handle navigation from homepage
         if (sectionId === 'homepage') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setActiveSection('homepage');
-        } else {
+        } else if (sectionId === 'about') {
             const element = document.getElementById(sectionId);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
+            setActiveSection('about');
+        } else if (sectionId === 'history') {
+            // Navigate to timeline page
+            window.location.href = '/timeline';
         }
+        
         setIsMenuOpen(false);
     };
 
@@ -147,7 +127,7 @@ const Navbar: React.FC = () => {
     const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newLang = e.target.value;
         localStorage.setItem("lang", newLang);
-        setLang(newLang);
+        setLanguage(newLang); // Update the context
         i18n.changeLanguage(newLang); // Update i18next language
         window.dispatchEvent(new Event('languagechange'));
     };
@@ -156,6 +136,28 @@ const Navbar: React.FC = () => {
     const handleSearchFocus = () => setShowDropdown(true);
     const handleSearchButtonClick = () => setShowDropdown(true);
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value);
+
+    // Transform search results to match the expected format
+    const transformedSearchResults = searchResults.flatMap((bigEvent, bigEventIndex) =>
+        bigEvent.events.map((event, eventIndex) => ({
+            event: {
+                ...event,
+                date: {
+                    milady: { 
+                        start: event.date?.milady?.start || 0, 
+                        end: event.date?.milady?.end || event.date?.milady?.start || 0 
+                    },
+                    hijry: event.date?.hijri ? {
+                        start: event.date.hijri.start,
+                        end: event.date.hijri.end || event.date.hijri.start,
+                        approx: false
+                    } : undefined
+                }
+            } as TimelineEvent,
+            bigEventIndex,
+            eventIndex
+        }))
+    );
 
     const navItems = [
         { id: 'homepage', label: { en: 'Home', ar: 'الرئيسية', fr: 'Accueil', es: 'Inicio' } },
@@ -208,7 +210,7 @@ const Navbar: React.FC = () => {
                                 value={searchValue}
                                 onChange={handleSearchChange}
                                 onFocus={handleSearchFocus}
-                                placeholder={lang === 'en' ? 'Search...' : lang === 'ar' ? 'بحث...' : lang === 'fr' ? 'Recherche...' : 'Buscar...'}
+                                placeholder={language === 'en' ? 'Search...' : language === 'ar' ? 'بحث...' : language === 'fr' ? 'Recherche...' : 'Buscar...'}
                                 className="w-full py-2 pl-4 pr-10 rounded-lg bg-black/40 text-white border border-green-600/30 focus:outline-none focus:ring-2 focus:ring-green-600/50 focus:border-transparent transition-all duration-300 placeholder-gray-400 shadow-lg shadow-black/10"
                             />
                             <button
@@ -219,6 +221,8 @@ const Navbar: React.FC = () => {
                             >
                                 <FaSearch className="w-5 h-5" />
                             </button>
+                            
+                            {/* Search Dropdown */}
                             <AnimatePresence>
                                 {showDropdown && (
                                     <motion.div
@@ -226,12 +230,22 @@ const Navbar: React.FC = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -10 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute left-0 right-0 mt-2 bg-black/90 border border-green-600/30 rounded-lg shadow-lg z-50 p-2 max-h-80 overflow-y-auto"
+                                        className="absolute top-full left-0 right-0 mt-2 bg-black/95 backdrop-blur-sm border border-green-600/30 rounded-lg shadow-xl max-h-96 overflow-y-auto z-50"
                                     >
-                                        {filteredEvents.length === 0 ? (
-                                            <div className="text-gray-300 text-sm p-4">No results found.</div>
+                                        {searchLoading ? (
+                                            <div className="p-4 text-center text-green-400">
+                                                {language === 'en' ? 'Searching...' : language === 'ar' ? 'جاري البحث...' : language === 'fr' ? 'Recherche...' : 'Buscando...'}
+                                            </div>
+                                        ) : searchValue.trim() === '' ? (
+                                            <div className="p-4 text-center text-gray-400">
+                                                {language === 'en' ? 'Start typing to search...' : language === 'ar' ? 'ابدأ الكتابة للبحث...' : language === 'fr' ? 'Commencez à taper pour rechercher...' : 'Comience a escribir para buscar...'}
+                                            </div>
+                                        ) : transformedSearchResults.length === 0 ? (
+                                            <div className="p-4 text-center text-gray-400">
+                                                {language === 'en' ? 'No results found' : language === 'ar' ? 'لم يتم العثور على نتائج' : language === 'fr' ? 'Aucun résultat trouvé' : 'No se encontraron resultados'}
+                                            </div>
                                         ) : (
-                                            filteredEvents.map(({ event, bigEventIndex, eventIndex }, idx) => {
+                                            transformedSearchResults.map(({ event, bigEventIndex, eventIndex }, idx) => {
                                                 const eventId = getEventId(event, bigEventIndex, eventIndex);
                                                 return (
                                                     <button
@@ -257,265 +271,171 @@ const Navbar: React.FC = () => {
                     </div>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-1">
-                        <div className="flex items-center gap-2">
-                            {/* Home: scroll to top, About: scroll to #about, History: go to /timeline */}
+                    <div className="hidden md:flex items-center space-x-8">
+                        {navItems.map((item) => (
                             <motion.button
-                                key="homepage"
-                                onClick={() => scrollToSection('homepage')}
-                                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                                    isActive('homepage') 
-                                        ? 'text-white bg-green-600/20' 
-                                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                key={item.id}
+                                onClick={() => scrollToSection(item.id)}
+                                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+                                    isActive(item.id) 
+                                        ? 'text-green-400' 
+                                        : 'text-gray-300 hover:text-green-400'
                                 }`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <span className="relative z-10">
-                                    {lang === 'en' ? 'Home' : lang === 'ar' ? 'الرئيسية' : lang === 'fr' ? 'Accueil' : 'Inicio'}
-                                </span>
-                                {isActive('homepage') && (
+                                {item.label[language as keyof typeof item.label] || item.label.en}
+                                {isActive(item.id) && (
                                     <motion.div
-                                        className="absolute bottom-0 left-0 h-0.5 bg-green-500"
-                                        initial={{ width: 0 }}
-                                        animate={{ width: '100%' }}
-                                        transition={{ duration: 0.3 }}
+                                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-green-400"
+                                        layoutId="activeSection"
                                     />
                                 )}
                             </motion.button>
-                            <motion.button
-                                key="about"
-                                onClick={() => scrollToSection('about')}
-                                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                                    isActive('about') 
-                                        ? 'text-white bg-green-600/20' 
-                                        : 'text-gray-300 hover:text-white hover:bg-white/10'
-                                }`}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <span className="relative z-10">
-                                    {lang === 'en' ? 'About' : lang === 'ar' ? 'حول' : lang === 'fr' ? 'À propos' : 'Acerca de'}
-                                </span>
-                                {isActive('about') && (
-                                    <motion.div
-                                        className="absolute bottom-0 left-0 h-0.5 bg-green-500"
-                                        initial={{ width: 0 }}
-                                        animate={{ width: '100%' }}
-                                        transition={{ duration: 0.3 }}
-                                    />
-                                )}
-                            </motion.button>
-                            <motion.button
-                                key="history"
-                                onClick={() => window.location.href = '/timeline'}
-                                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                                    isActive('history') 
-                                        ? 'text-white bg-green-600/20' 
-                                        : 'text-gray-300 hover:text-white hover:bg-white/10'
-                                }`}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <span className="relative z-10">
-                                    {lang === 'en' ? 'History' : lang === 'ar' ? 'التاريخ' : lang === 'fr' ? 'Histoire' : 'Historia'}
-                                </span>
-                                {isActive('history') && (
-                                    <motion.div
-                                        className="absolute bottom-0 left-0 h-0.5 bg-green-500"
-                                        initial={{ width: 0 }}
-                                        animate={{ width: '100%' }}
-                                        transition={{ duration: 0.3 }}
-                                    />
-                                )}
-                            </motion.button>
-                        </div>
+                        ))}
+                    </div>
 
+                    {/* Language Selector & Mobile Menu Button */}
+                    <div className="flex items-center space-x-4">
                         {/* Language Selector */}
-                        <motion.div 
-                            className="ml-6"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <div className="relative group">
+                        <div className="relative group">
+                            <div className="relative">
                                 <select
-                                    className="appearance-none bg-black/40 backdrop-blur-lg border border-green-600/30 text-white pl-10 pr-10 py-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-600/50 focus:border-transparent transition-all duration-300 hover:border-green-600/70 hover:bg-black/60 cursor-pointer shadow-lg shadow-black/10"
+                                    value={language}
                                     onChange={handleLanguageChange}
-                                    value={lang}
+                                    className="appearance-none bg-black/40 text-white border border-green-600/30 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-green-600/50 focus:border-transparent transition-all duration-300 cursor-pointer text-sm font-medium shadow-lg shadow-black/10"
                                 >
-                                    <option value="ar" className="bg-gray-900/90 backdrop-blur-lg text-white py-2">🇲🇦 العربية</option>
-                                    <option value="en" className="bg-gray-900/90 backdrop-blur-lg text-white py-2">🇺🇸 English</option>
-                                    <option value="fr" className="bg-gray-900/90 backdrop-blur-lg text-white py-2">🇫🇷 Français</option>
-                                    <option value="es" className="bg-gray-900/90 backdrop-blur-lg text-white py-2">🇪🇸 Español</option>
+                                    <option value="en">EN</option>
+                                    <option value="ar">AR</option>
+                                    <option value="fr">FR</option>
+                                    <option value="es">ES</option>
                                 </select>
-                                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <svg className="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                                    </svg>
-                                </div>
                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <svg className="h-4 w-4 text-green-500 transition-transform duration-300 group-hover:translate-y-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="h-5 w-5 text-green-500 transition-transform duration-300 group-hover:translate-y-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
                                 </div>
                             </div>
-                        </motion.div>
-                    </div>
-
-                    {/* Mobile Menu Button */}
-                    {!isMenuOpen && (
-                        <motion.button
-                            onClick={() => setIsMenuOpen(true)}
-                            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white focus:outline-none z-50 relative"
-                            aria-label="Open mobile menu"
-                            title="Open menu"
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            <div className="w-6 h-6 flex flex-col justify-between items-center">
-                                <span className="w-full h-0.5 bg-current transition-all duration-300" />
-                                <span className="w-full h-0.5 bg-current transition-all duration-300" />
-                                <span className="w-full h-0.5 bg-current transition-all duration-300" />
-                            </div>
-                        </motion.button>
-                    )}
-                    {isMenuOpen && (
-                        <motion.button
-                            onClick={() => setIsMenuOpen(false)}
-                            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white focus:outline-none z-50 relative"
-                            aria-label="Close mobile menu"
-                            title="Close menu"
-                        >
-                            <span className="sr-only">Close main menu</span>
-                            <div className="w-6 h-6 flex flex-col justify-between items-center">
-                                <span className="w-full h-0.5 bg-current transform rotate-45 translate-y-2.5 transition-all duration-300" />
-                                <span className="w-full h-0.5 bg-current opacity-0 transition-all duration-300" />
-                                <span className="w-full h-0.5 bg-current transform -rotate-45 -translate-y-2.5 transition-all duration-300" />
-                            </div>
-                        </motion.button>
-                    )}
-                </div>
-            </div>
-
-            {/* Mobile Menu */}
-            <AnimatePresence>
-                {isMenuOpen && (
-                    <motion.div
-                        className="md:hidden"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        ref={mobileMenuRef}
-                    >
+                        </div>
                         
-                        <div className="glass px-4 pt-2 pb-4 space-y-1">
-                            {navItems.map((item) => (
-                                <motion.button
-                                    key={item.id}
-                                    onClick={() => {
-                                        if (item.id === 'history') {
-                                            window.location.href = '/timeline';
-                                        } else {
-                                            scrollToSection(item.id);
-                                        }
-                                    }}
-                                    className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
-                                        isActive(item.id)
-                                            ? 'bg-green-600/20 text-white'
-                                            : 'text-gray-300 hover:bg-white/10 hover:text-white'
-                                    }`}
-                                    whileHover={{ x: 10 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    {item.label[lang as keyof typeof item.label]}
-                                </motion.button>
-                            ))}
+                        {/* Mobile Menu Button */}
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="md:hidden p-2 text-gray-300 hover:text-green-400 transition-colors duration-300"
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {isMenuOpen ? (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                ) : (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                )}
+                            </svg>
+                        </button>
+                    </div>
+                </div>
 
-                            {/* Mobile Language Selector */}
-                            <div className="pt-2 pb-1">
-                                <div className="relative group">
-                                    <select
-                                        className="w-full appearance-none bg-black/40 backdrop-blur-lg border border-green-600/30 text-white pl-12 pr-10 py-3 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-green-600/50 focus:border-transparent transition-all duration-300 hover:border-green-600/70 hover:bg-black/60 cursor-pointer shadow-lg shadow-black/10"
-                                        onChange={handleLanguageChange}
-                                        value={lang}
-                                    >
-                                        <option value="ar" className="bg-gray-900/90 backdrop-blur-lg text-white py-2">🇲🇦 العربية</option>
-                                        <option value="en" className="bg-gray-900/90 backdrop-blur-lg text-white py-2">🇺🇸 English</option>
-                                        <option value="fr" className="bg-gray-900/90 backdrop-blur-lg text-white py-2">🇫🇷 Français</option>
-                                        <option value="es" className="bg-gray-900/90 backdrop-blur-lg text-white py-2">🇪🇸 Español</option>
-                                    </select>
-                                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                        <svg className="h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                                        </svg>
-                                    </div>
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                        <svg className="h-5 w-5 text-green-500 transition-transform duration-300 group-hover:translate-y-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                                        </svg>
+                {/* Mobile Menu */}
+                <AnimatePresence>
+                    {isMenuOpen && (
+                        <motion.div
+                            ref={mobileMenuRef}
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="md:hidden bg-black/95 backdrop-blur-sm border-t border-green-600/30"
+                        >
+                            <div className="px-4 py-6 space-y-4">
+                                {/* Mobile Navigation */}
+                                <div className="space-y-2">
+                                    {navItems.map((item) => (
+                                        <button
+                                            key={item.id}
+                                            onClick={() => scrollToSection(item.id)}
+                                            className={`block w-full text-left px-4 py-3 rounded-lg transition-colors duration-300 ${
+                                                isActive(item.id) 
+                                                    ? 'bg-green-600/20 text-green-400' 
+                                                    : 'text-gray-300 hover:bg-green-600/10 hover:text-green-400'
+                                            }`}
+                                        >
+                                            {item.label[language as keyof typeof item.label] || item.label.en}
+                                        </button>
+                                    ))}
+                                </div>
+                                
+                                {/* Search Bar (Mobile) */}
+                                <div className="w-full mb-3 md:hidden" ref={searchRef}>
+                                    <div className="relative w-full">
+                                        <input
+                                            type="text"
+                                            value={searchValue}
+                                            onChange={handleSearchChange}
+                                            onFocus={handleSearchFocus}
+                                            placeholder={language === 'en' ? 'Search...' : language === 'ar' ? 'بحث...' : language === 'fr' ? 'Recherche...' : 'Buscar...'}
+                                            className="w-full py-2 pl-4 pr-10 rounded-lg bg-black/40 text-white border border-green-600/30 focus:outline-none focus:ring-2 focus:ring-green-600/50 focus:border-transparent transition-all duration-300 placeholder-gray-400 shadow-lg shadow-black/10"
+                                        />
+                                        <button
+                                            className="absolute right-2 top-1/2 -translate-y-1/2 text-green-400 hover:text-green-300 p-1"
+                                            tabIndex={-1}
+                                            type="button"
+                                            onClick={handleSearchButtonClick}
+                                        >
+                                            <FaSearch className="w-5 h-5" />
+                                        </button>
+                                        
+                                        {/* Mobile Search Dropdown */}
+                                        <AnimatePresence>
+                                            {showDropdown && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: -10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: -10 }}
+                                                    transition={{ duration: 0.2 }}
+                                                    className="absolute top-full left-0 right-0 mt-2 bg-black/95 backdrop-blur-sm border border-green-600/30 rounded-lg shadow-xl max-h-96 overflow-y-auto z-50"
+                                                >
+                                                    {searchLoading ? (
+                                                        <div className="p-4 text-center text-green-400">
+                                                            {language === 'en' ? 'Searching...' : language === 'ar' ? 'جاري البحث...' : language === 'fr' ? 'Recherche...' : 'Buscando...'}
+                                                        </div>
+                                                    ) : searchValue.trim() === '' ? (
+                                                        <div className="p-4 text-center text-gray-400">
+                                                            {language === 'en' ? 'Start typing to search...' : language === 'ar' ? 'ابدأ الكتابة للبحث...' : language === 'fr' ? 'Commencez à taper pour rechercher...' : 'Comience a escribir para buscar...'}
+                                                        </div>
+                                                    ) : transformedSearchResults.length === 0 ? (
+                                                        <div className="p-4 text-center text-gray-400">
+                                                            {language === 'en' ? 'No results found' : language === 'ar' ? 'لم يتم العثور على نتائج' : language === 'fr' ? 'Aucun résultat trouvé' : 'No se encontraron resultados'}
+                                                        </div>
+                                                    ) : (
+                                                        transformedSearchResults.map(({ event, bigEventIndex, eventIndex }, idx) => {
+                                                            const eventId = getEventId(event, bigEventIndex, eventIndex);
+                                                            return (
+                                                                <button
+                                                                    key={event.article_title + idx}
+                                                                    className="block w-full text-left p-3 border-b border-green-600/10 last:border-b-0 hover:bg-green-600/10 cursor-pointer"
+                                                                    onClick={() => {
+                                                                        setSearchValue('');
+                                                                        setShowDropdown(false);
+                                                                        setIsMenuOpen(false); // Close mobile menu
+                                                                        router.push(`/event/${eventId}`);
+                                                                    }}
+                                                                >
+                                                                    <div className="font-semibold text-white">{event.article_title}</div>
+                                                                    <div className="text-xs text-green-400 mb-1">{event.date.milady.start}{event.date.milady.end !== event.date.milady.start ? ` - ${event.date.milady.end}` : ''}</div>
+                                                                    <div className="text-gray-300 text-xs line-clamp-2">{event.sections[0]?.paragraphs[0]?.text}</div>
+                                                                </button>
+                                                            );
+                                                        })
+                                                    )}
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </div>
                                 </div>
                             </div>
-                            {/* Search Bar (Mobile) */}
-                        <div className="w-full mb-3 md:hidden" ref={searchRef}>
-                            <div className="relative w-full">
-                                <input
-                                    type="text"
-                                    value={searchValue}
-                                    onChange={handleSearchChange}
-                                    onFocus={handleSearchFocus}
-                                    placeholder={lang === 'en' ? 'Search...' : lang === 'ar' ? 'بحث...' : lang === 'fr' ? 'Recherche...' : 'Buscar...'}
-                                    className="w-full py-2 pl-4 pr-10 rounded-lg bg-black/40 text-white border border-green-600/30 focus:outline-none focus:ring-2 focus:ring-green-600/50 focus:border-transparent transition-all duration-300 placeholder-gray-400 shadow-lg shadow-black/10"
-                                />
-                                <button
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 text-green-400 hover:text-green-300 p-1"
-                                    tabIndex={-1}
-                                    type="button"
-                                    onClick={handleSearchButtonClick}
-                                >
-                                    <FaSearch className="w-5 h-5" />
-                                </button>
-                                <AnimatePresence>
-                                    {showDropdown && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: -10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -10 }}
-                                            transition={{ duration: 0.2 }}
-                                            className="absolute left-0 right-0 mt-2 bg-black/90 border border-green-600/30 rounded-lg shadow-lg z-50 p-2 max-h-80 overflow-y-auto"
-                                        >
-                                            {filteredEvents.length === 0 ? (
-                                                <div className="text-gray-300 text-sm p-4">No results found.</div>
-                                            ) : (
-                                                filteredEvents.map(({ event, bigEventIndex, eventIndex }, idx) => {
-                                                    const eventId = getEventId(event, bigEventIndex, eventIndex);
-                                                    return (
-                                                        <button
-                                                            key={event.article_title + idx}
-                                                            className="block w-full text-left p-3 border-b border-green-600/10 last:border-b-0 hover:bg-green-600/10 cursor-pointer"
-                                                            onClick={() => {
-                                                                setSearchValue('');
-                                                                setShowDropdown(false);
-                                                                setIsMenuOpen(false); // Close mobile menu
-                                                                router.push(`/event/${eventId}`);
-                                                            }}
-                                                        >
-                                                            <div className="font-semibold text-white">{event.article_title}</div>
-                                                            <div className="text-xs text-green-400 mb-1">{event.date.milady.start}{event.date.milady.end !== event.date.milady.start ? ` - ${event.date.milady.end}` : ''}</div>
-                                                            <div className="text-gray-300 text-xs line-clamp-2">{event.sections[0]?.paragraphs[0]?.text}</div>
-                                                        </button>
-                                                    );
-                                                })
-                                            )}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
         </motion.nav>
     );
 };

@@ -10,30 +10,25 @@ export interface ApiSection {
   paragraphs: ApiParagraph[];
 }
 
-export interface ApiDate {
-  hijry?: {
-    approx?: boolean;
-    end?: number | null;
-    note?: string | null;
-    start?: number | null;
-  };
-  milady: {
-    start: number;
-    end: number;
-  };
-}
-
 export interface ApiEvent {
   event_name: string;
   article_title: string;
-  date: string | ApiDate;
   sections: ApiSection[];
+  date?: {
+    hijri: {
+      start: number;
+      end?: number;
+    };
+    milady: {
+      start: number;
+      end?: number;
+    };
+  };
 }
 
 export interface ApiBigEvent {
   big_event_name: string;
   events: ApiEvent[];
-  score?: number;
 }
 
 export interface ApiResponse {
@@ -46,9 +41,9 @@ export interface ApiError {
   message: string;
 }
 
-// API Configuration
-const API_BASE_URL = 'http://localhost:5000';
-const DEFAULT_LANGUAGE = 'en';
+// API Configuration - Updated to use local Next.js API
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000/api';
+const DEFAULT_LANGUAGE = 'ar'; // Changed to match LanguageContext default
 
 // Cache configuration
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
@@ -112,10 +107,12 @@ class ApiService {
   // Get all historical events
   static async getAllEvents(language: string = DEFAULT_LANGUAGE): Promise<ApiBigEvent[]> {
     try {
-      const result = await this.getCachedOrFetch<any>('/api/historical-events/', { language });
+      const result = await this.getCachedOrFetch<any>('/historical-events/', { language });
       
-      // Handle both array and single object responses
-      if (Array.isArray(result)) {
+      // Handle the new API response format with status and data
+      if (result && result.status === 'success' && result.data) {
+        return result.data;
+      } else if (Array.isArray(result)) {
         return result;
       } else if (result && typeof result === 'object') {
         // If it's a single object, wrap it in an array
@@ -136,10 +133,35 @@ class ApiService {
     language: string = DEFAULT_LANGUAGE
   ): Promise<ApiBigEvent> {
     const encodedPeriod = encodeURIComponent(periodName);
-    return this.getCachedOrFetch<ApiBigEvent>(
-      `/api/historical-events/${encodedPeriod}`, 
+    const result = await this.getCachedOrFetch<any>(
+      `/historical-events/${encodedPeriod}`, 
       { language }
     );
+    
+    // Handle the new API response format
+    if (result && result.status === 'success' && result.data) {
+      return result.data;
+    }
+    return result;
+  }
+
+  // Search events
+  static async searchEvents(query: string, language: string = DEFAULT_LANGUAGE): Promise<ApiBigEvent[]> {
+    try {
+      const result = await this.getCachedOrFetch<any>('/historical-events/search', { 
+        q: query, 
+        language 
+      });
+      
+      // Handle the new API response format
+      if (result && result.status === 'success' && result.data) {
+        return result.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Failed to search events:', error);
+      return [];
+    }
   }
 
   // Get welcome message (for testing API connection)
@@ -147,7 +169,7 @@ class ApiService {
     return this.makeRequest<{ message: string }>('/');
   }
 
-  // Clear cache
+  // Clear all cache
   static clearCache(): void {
     cache.clear();
   }

@@ -3,7 +3,6 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useAllEvents } from "../../../hooks/useApi";
-import { transformApiDataToBigEvents } from "../../../utils/dataTransformer";
 import { useEffect, useState } from "react";
 import { TimelineEvent } from "../../../components/Timeline";
 import { useLanguage } from "../../../contexts/LanguageContext";
@@ -44,25 +43,120 @@ export default function EventDetailPage() {
 
   useEffect(() => {
     if (apiData && eventId) {
-      const bigEvents = transformApiDataToBigEvents(apiData);
-      const parts = eventId.split('-');
+      // Decode the URL-encoded event ID
+      const decodedEventId = decodeURIComponent(eventId);
+      console.log('Decoded Event ID:', decodedEventId);
+      console.log('API Data:', apiData);
+      
+      // Find the event by matching the event name and indices
+      // The format is: event-name-bigEventIndex-eventIndex
+      const parts = decodedEventId.split('-');
+      
       if (parts.length >= 3) {
+        // Get the last two parts as indices
         const bigEventIndex = parseInt(parts[parts.length - 2]);
         const eventIndex = parseInt(parts[parts.length - 1]);
+        
+        console.log('Parsed indices:', { bigEventIndex, eventIndex });
+        
         if (!isNaN(bigEventIndex) && !isNaN(eventIndex) && 
-            bigEventIndex >= 0 && bigEventIndex < bigEvents.length) {
-          const bigEvent = bigEvents[bigEventIndex];
+            bigEventIndex >= 0 && bigEventIndex < apiData.length) {
+          const bigEvent = apiData[bigEventIndex];
           if (eventIndex >= 0 && eventIndex < bigEvent.events.length) {
-            setEvent(bigEvent.events[eventIndex]);
+            const apiEvent = bigEvent.events[eventIndex];
+            
+            // Transform the API event to TimelineEvent format
+            const timelineEvent: TimelineEvent = {
+              event_name: apiEvent.event_name,
+              article_title: apiEvent.article_title,
+              date: {
+                milady: {
+                  start: apiEvent.date?.milady?.start || 0,
+                  end: apiEvent.date?.milady?.end || apiEvent.date?.milady?.start || 0
+                },
+                hijry: apiEvent.date?.hijri ? {
+                  start: apiEvent.date.hijri.start,
+                  end: apiEvent.date.hijri.end || apiEvent.date.hijri.start,
+                  approx: false
+                } : undefined
+              },
+              sections: apiEvent.sections.map(section => ({
+                subtitle: section.subtitle,
+                paragraphs: section.paragraphs.map(paragraph => ({
+                  paragraph_id: paragraph.paragraph_id || `${section.subtitle}-${paragraph.text.substring(0, 10)}`,
+                  text: paragraph.text,
+                  source_URLs: paragraph.source_URLs || []
+                }))
+              }))
+            };
+            
+            console.log('Found and transformed event:', timelineEvent);
+            setEvent(timelineEvent);
             return;
           }
         }
       }
+      
+      // Fallback: try to find by event name if parsing fails
+      console.log('Trying fallback search by event name...');
+      for (let bigEventIndex = 0; bigEventIndex < apiData.length; bigEventIndex++) {
+        const bigEvent = apiData[bigEventIndex];
+        for (let eventIndex = 0; eventIndex < bigEvent.events.length; eventIndex++) {
+          const apiEvent = bigEvent.events[eventIndex];
+          const expectedEventId = getEventId({
+            event_name: apiEvent.event_name,
+            article_title: apiEvent.article_title,
+            date: {
+              milady: {
+                start: apiEvent.date?.milady?.start || 0,
+                end: apiEvent.date?.milady?.end || apiEvent.date?.milady?.start || 0
+              }
+            },
+            sections: []
+          } as TimelineEvent, bigEventIndex, eventIndex);
+          
+          if (expectedEventId === decodedEventId) {
+            console.log('Found event by fallback:', { bigEventIndex, eventIndex });
+            
+            // Transform the API event to TimelineEvent format
+            const timelineEvent: TimelineEvent = {
+              event_name: apiEvent.event_name,
+              article_title: apiEvent.article_title,
+              date: {
+                milady: {
+                  start: apiEvent.date?.milady?.start || 0,
+                  end: apiEvent.date?.milady?.end || apiEvent.date?.milady?.start || 0
+                },
+                hijry: apiEvent.date?.hijri ? {
+                  start: apiEvent.date.hijri.start,
+                  end: apiEvent.date.hijri.end || apiEvent.date.hijri.start,
+                  approx: false
+                } : undefined
+              },
+              sections: apiEvent.sections.map(section => ({
+                subtitle: section.subtitle,
+                paragraphs: section.paragraphs.map(paragraph => ({
+                  paragraph_id: paragraph.paragraph_id || `${section.subtitle}-${paragraph.text.substring(0, 10)}`,
+                  text: paragraph.text,
+                  source_URLs: paragraph.source_URLs || []
+                }))
+              }))
+            };
+            
+            setEvent(timelineEvent);
+            return;
+          }
+        }
+      }
+      
       setEvent(null);
     }
   }, [apiData, eventId]);
 
-  // Remove useEffect for outside click
+  // Helper function to generate event ID (same as in Timeline and Navbar)
+  const getEventId = (event: TimelineEvent, bigEventIndex: number, eventIndex: number) => {
+    return `${event.event_name.replace(/\s+/g, '-').toLowerCase()}-${bigEventIndex}-${eventIndex}`;
+  };
 
   // Toggle handler for each paragraph
   const toggleSources = (paragraphId: string) => {
@@ -113,8 +207,18 @@ export default function EventDetailPage() {
           </div>
           <h2 className="text-xl font-semibold text-white mb-2">Event Not Found</h2>
           <p className="text-gray-400 mb-4">The requested event could not be found.</p>
-          <div className="text-sm text-gray-500 mb-4">
-            Debug: Event ID: {eventId} | Language: {language}
+          <div className="text-sm text-gray-500 mb-4 space-y-2">
+            <div>Debug: Event ID: {eventId}</div>
+            <div>Decoded: {decodeURIComponent(eventId)}</div>
+            <div>Language: {language}</div>
+            <div>API Data Available: {apiData ? `Yes (${apiData.length} big events)` : 'No'}</div>
+            {apiData && (
+              <div className="text-xs">
+                Available events: {apiData.map((be, i) => 
+                  `${be.big_event_name} (${be.events.length} events)`
+                ).join(', ')}
+              </div>
+            )}
           </div>
           <Link href="/timeline" className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
             Back to Timeline
@@ -141,7 +245,7 @@ export default function EventDetailPage() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {event.event_name}
+              {event.article_title}
             </h1>
             <div className="flex flex-wrap items-center gap-4">
               <time className="inline-flex items-center px-3 py-1 bg-[#141115] text-green-400 border border-green-500/40 rounded-full text-lg font-bold shadow-md">
